@@ -1,0 +1,19 @@
+# Created by https://www.toptal.com/developers/gitignore/api/nextjs,react,git
+# Edit at https://www.toptal.com/developers/gitignore?templates=nextjs,react,git
+
+### Git ###
+
+
+### NextJS ###
+# Dependencies
+/node_modules
+
+# Testing
+/coverage
+
+# Next.js
+/.next/
+
+# env
+/.env/
+
