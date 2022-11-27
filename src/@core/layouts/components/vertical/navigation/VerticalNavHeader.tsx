@@ -51,9 +51,6 @@ const VerticalNavHeader = (props: Props) => {
   // ** Props
   const { verticalNavMenuBranding: userVerticalNavMenuBranding } = props;
 
-  // ** Hooks
-  const theme = useTheme();
-
   return (
     <MenuHeaderWrapper className="nav-header" sx={{ pl: 6 }}>
       {userVerticalNavMenuBranding ? (
@@ -61,7 +58,7 @@ const VerticalNavHeader = (props: Props) => {
       ) : (
         <Link href="/" passHref>
           <StyledLink>
-            <img src="images/graduation.svg" width={30} />
+            <img src="/images/graduation.svg" width={35} />
             <HeaderTitle variant="h6" sx={{ ml: 3 }}>
               {themeConfig.templateName}
             </HeaderTitle>

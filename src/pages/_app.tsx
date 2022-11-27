@@ -62,10 +62,7 @@ const App = (props: ExtendedAppProps) => {
     <CacheProvider value={emotionCache}>
       <Head>
         <title>{`${themeConfig.templateName} - 실시간 대학 경쟁률 확인 사이트`}</title>
-        <meta
-          name="description"
-          content={`${themeConfig.templateName} – 실시간 대학 경쟁률 확인 사이트`}
-        />
+        <meta name="description" content={`${themeConfig.templateName}  실시간 대학 경쟁률 확인 사이트`} />
         <meta name="keywords" content="실시간 대학 경쟁률 확인 사이트" />
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
@@ -73,11 +70,7 @@ const App = (props: ExtendedAppProps) => {
       <SettingsProvider>
         <SettingsConsumer>
           {({ settings }) => {
-            return (
-              <ThemeComponent settings={settings}>
-                {getLayout(<Component {...pageProps} />)}
-              </ThemeComponent>
-            );
+            return <ThemeComponent settings={settings}>{getLayout(<Component {...pageProps} />)}</ThemeComponent>;
           }}
         </SettingsConsumer>
       </SettingsProvider>
