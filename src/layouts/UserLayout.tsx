@@ -40,7 +40,7 @@ const UserLayout = ({ children }: Props) => {
 
   const getLayout = () => {
     if (router.pathname === "/") {
-      return <div>랜딩페이지</div>;
+      return <div>{children}</div>;
     } else {
       return (
         <VerticalLayout
