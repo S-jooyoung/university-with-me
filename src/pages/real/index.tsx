@@ -23,7 +23,7 @@ import React, { useState } from "react";
 
 export default function Real() {
   const [keyword, setKeyword] = useState("");
-  const [competitionSort, setCompetitionSort] = useState("");
+  const [competitionSort, setCompetitionSort] = useState("competitionRatio,DESC");
   const { datas, loading, error } = usePosts(keyword, "department", competitionSort);
 
   const handleEnter = (e: any) => {
@@ -32,8 +32,6 @@ export default function Real() {
 
   const handleChange = (e: SelectChangeEvent) => {
     setCompetitionSort(e.target.value as string);
-    console.log(e.target.value);
-    console.log(datas);
   };
 
   return (
@@ -42,9 +40,9 @@ export default function Real() {
         <Grid item xs={4} sm={4}>
           <FormControl fullWidth>
             <InputLabel>경쟁률</InputLabel>
-            <Select label="Status" defaultValue="competitionRatio,ASC" onChange={handleChange}>
-              <MenuItem value="competitionRatio,DESC">낮은순</MenuItem>
-              <MenuItem value="competitionRatio,ASC">높은순</MenuItem>
+            <Select label="Status" defaultValue={competitionSort} onChange={handleChange}>
+              <MenuItem value="competitionRatio,DESC">높은순</MenuItem>
+              <MenuItem value="competitionRatio,ASC">낮은순</MenuItem>
             </Select>
           </FormControl>
         </Grid>

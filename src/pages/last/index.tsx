@@ -4,7 +4,7 @@ import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
-import Select from "@mui/material/Select";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 
 // ** Styled Component Import
@@ -23,10 +23,15 @@ import React, { useState } from "react";
 
 export default function Last() {
   const [keyword, setKeyword] = useState("");
-  const { datas, loading, error } = usePosts(keyword, "department/last/", "");
+  const [competitionSort, setCompetitionSort] = useState("competitionRatio,DESC");
+  const { datas, loading, error } = usePosts(keyword, "department/last", competitionSort);
 
   const handleEnter = (e: any) => {
     setKeyword(e.target.value);
+  };
+
+  const handleChange = (e: SelectChangeEvent) => {
+    setCompetitionSort(e.target.value as string);
   };
 
   return (
@@ -35,9 +40,9 @@ export default function Last() {
         <Grid item xs={4} sm={4}>
           <FormControl fullWidth>
             <InputLabel>경쟁률</InputLabel>
-            <Select label="Status" defaultValue="competitionRatio,ASC">
-              <MenuItem value="competitionRatio,DESC">낮은순</MenuItem>
-              <MenuItem value="competitionRatio,ASC">높은순</MenuItem>
+            <Select label="Status" defaultValue={competitionSort} onChange={handleChange}>
+              <MenuItem value="competitionRatio,DESC">높은순</MenuItem>
+              <MenuItem value="competitionRatio,ASC">낮은순</MenuItem>
             </Select>
           </FormControl>
         </Grid>
@@ -53,9 +58,9 @@ export default function Last() {
         <Grid item xs={4} sm={4}>
           <FormControl fullWidth>
             <InputLabel>지역</InputLabel>
-            <Select label="Status" defaultValue="전체">
-              <MenuItem value="">전체</MenuItem>
-              <MenuItem value="">전체</MenuItem>
+            <Select label="Status" defaultValue="">
+              <MenuItem value=""></MenuItem>
+              <MenuItem value=""></MenuItem>
             </Select>
           </FormControl>
         </Grid>

@@ -20,7 +20,7 @@ const navigation = (): VerticalNavItemsType => {
       path: "/real",
     },
     {
-      title: "지난 경쟁률",
+      title: "2022 경쟁률",
       icon: HomeOutline,
       path: "/last",
     },

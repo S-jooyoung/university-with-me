@@ -24,7 +24,7 @@ const usePost = (keyword: string, target: string, sort: string): GetCompetitionR
       }
     };
     getPosts();
-  }, [keyword]);
+  }, [keyword, sort]);
 
   return { datas, loading, error };
 };
