@@ -18,11 +18,12 @@ import Magnify from "mdi-material-ui/Magnify";
 
 // ** Custom Hooks
 import usePosts from "src/hooks/usePosts";
+
 import React, { useState } from "react";
 
-const Dashboard = () => {
+export default function Last() {
   const [keyword, setKeyword] = useState("");
-  const { datas, loading, error } = usePosts(keyword);
+  const { datas, loading, error } = usePosts(keyword, "department/last/", "");
 
   const handleEnter = (e: any) => {
     setKeyword(e.target.value);
@@ -31,16 +32,34 @@ const Dashboard = () => {
   return (
     <ApexChartWrapper>
       <Grid container spacing={6}>
-        <Grid item xs={5} sm={3}>
+        <Grid item xs={4} sm={4}>
           <FormControl fullWidth>
             <InputLabel>경쟁률</InputLabel>
-            <Select label="Status" defaultValue="high">
-              <MenuItem value="high">낮은순</MenuItem>
-              <MenuItem value="low">높은순</MenuItem>
+            <Select label="Status" defaultValue="competitionRatio,ASC">
+              <MenuItem value="competitionRatio,DESC">낮은순</MenuItem>
+              <MenuItem value="competitionRatio,ASC">높은순</MenuItem>
             </Select>
           </FormControl>
         </Grid>
-        <Grid item xs={7} sm={9}>
+        <Grid item xs={4} sm={4}>
+          <FormControl fullWidth>
+            <InputLabel>대학별</InputLabel>
+            <Select label="Status" defaultValue="">
+              <MenuItem value=""></MenuItem>
+              <MenuItem value=""></MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid item xs={4} sm={4}>
+          <FormControl fullWidth>
+            <InputLabel>지역</InputLabel>
+            <Select label="Status" defaultValue="전체">
+              <MenuItem value="">전체</MenuItem>
+              <MenuItem value="">전체</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid item xs={12} sm={12}>
           <TextField
             fullWidth
             size="medium"
@@ -63,6 +82,4 @@ const Dashboard = () => {
       </Grid>
     </ApexChartWrapper>
   );
-};
-
-export default Dashboard;
+}

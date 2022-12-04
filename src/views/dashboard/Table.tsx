@@ -28,7 +28,6 @@ const DashboardTable = ({ datas, loading, error }: GetCompetitionResponse) => {
     const data = datas.map((data) => {
       if (data.admissionType) {
         data.admissionType = data.admissionType.replace(/경쟁률 현황/gi, "");
-        console.log(data.admissionType);
       }
     });
   }, [datas]);
@@ -51,9 +50,7 @@ const DashboardTable = ({ datas, loading, error }: GetCompetitionResponse) => {
               <TableRow hover key={data.id} sx={{ "&:last-of-type td, &:last-of-type th": { border: 0 } }}>
                 <TableCell sx={{ py: (theme) => `${theme.spacing(0.5)} !important` }}>
                   <Box sx={{ display: "flex", flexDirection: "column" }}>
-                    <Typography sx={{ fontWeight: 500, fontSize: "0.875rem !important" }}>
-                      {data.universityName}
-                    </Typography>
+                    <Typography sx={{ fontWeight: 500, fontSize: "0.875rem !important" }}>{data.universityName}</Typography>
                   </Box>
                 </TableCell>
                 <TableCell>{data.admissionType}</TableCell>

@@ -7,31 +7,23 @@ import { VerticalNavItemsType } from "src/@core/layouts/types";
 const navigation = (): VerticalNavItemsType => {
   return [
     {
-      title: "전체",
+      title: "홈",
       icon: HomeOutline,
       path: "/",
     },
     {
-      sectionTitle: "카테고리",
+      sectionTitle: "정시 경쟁률",
     },
-    // {
-    //   title: "4년제",
-    //   icon: AccountPlusOutline,
-    //   path: "/pages/login",
-    //   openInNewTab: true,
-    // },
-    // {
-    //   title: "전문대학(교)",
-    //   icon: AccountPlusOutline,
-    //   path: "/pages/register",
-    //   openInNewTab: true,
-    // },
-    // {
-    //   title: "대학원",
-    //   icon: AccountPlusOutline,
-    //   path: "/pages/register",
-    //   openInNewTab: true,
-    // },
+    {
+      title: "2023 실시간 경쟁률",
+      icon: HomeOutline,
+      path: "/real",
+    },
+    {
+      title: "지난 경쟁률",
+      icon: HomeOutline,
+      path: "/last",
+    },
   ];
 };
 
