@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const LandingPage = () => {
   return (
     <div className="relative overflow-hidden">
@@ -11,9 +13,11 @@ const LandingPage = () => {
                   <span className="block text-black mt-3">야, 너도 갈 수 있어</span>
                 </h1>
                 <p className="mt-3 mb-3 text-base text-gray-400 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">실시간 정시 경쟁률 조회 서비스</p>
-                <button type="submit" className="block w-4/12 rounded-md bg-violet-500 py-3 px-4 font-medium text-white shadow hover:bg-violet-800 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 focus:ring-offset-gray-900 sm:m-auto lg:m-0 min-[375px]:m-auto">
-                  시작하기
-                </button>
+                <Link href="/ratios">
+                  <button type="submit" className="block w-4/12 rounded-md bg-violet-500 py-3 px-4 font-medium text-white shadow hover:bg-violet-800 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 focus:ring-offset-gray-900 sm:m-auto lg:m-0 min-[375px]:m-auto">
+                    시작하기
+                  </button>
+                </Link>
               </div>
             </div>
             <div className="mt-12 hidden lg:block ">
