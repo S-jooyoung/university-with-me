@@ -60,9 +60,9 @@ export default function Real() {
         <Grid item xs={4} sm={4}>
           <FormControl fullWidth>
             <InputLabel>지역</InputLabel>
-            <Select label="Status" defaultValue="전체">
-              <MenuItem value="">전체</MenuItem>
-              <MenuItem value="">전체</MenuItem>
+            <Select label="Status" defaultValue="">
+              <MenuItem value=""></MenuItem>
+              <MenuItem value=""></MenuItem>
             </Select>
           </FormControl>
         </Grid>

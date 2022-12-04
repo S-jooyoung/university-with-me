@@ -42,7 +42,6 @@ export type LayoutProps = {
 };
 
 export type CompetitionData = {
-  id: number;
   universityName: string;
   admissionType: string;
   departmentName: string;
