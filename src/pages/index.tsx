@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const LandingPage = () => {
+export default function LandingPage() {
   return (
     <div className="relative overflow-hidden">
       <div className="bg-white pt-8 pb-14 sm:pt-16 lg:overflow-hidden lg:pt-24 lg:pb-24">
@@ -28,6 +28,4 @@ const LandingPage = () => {
       </div>
     </div>
   );
-};
-
-export default LandingPage;
+}
