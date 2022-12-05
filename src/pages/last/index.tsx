@@ -27,10 +27,12 @@ export default function Last() {
   const { datas, loading, error } = usePosts(keyword, "department/last", competitionSort);
 
   const handleEnter = (e: any) => {
+    e.preventDefault();
     setKeyword(e.target.value);
   };
 
   const handleChange = (e: SelectChangeEvent) => {
+    e.preventDefault();
     setCompetitionSort(e.target.value as string);
   };
 

@@ -27,10 +27,12 @@ export default function Real() {
   const { datas, loading, error } = usePosts(keyword, "department", competitionSort);
 
   const handleEnter = (e: any) => {
+    e.preventDefault();
     setKeyword(e.target.value as string);
   };
 
   const handleChange = (e: SelectChangeEvent) => {
+    e.preventDefault();
     setCompetitionSort(e.target.value as string);
   };
 
