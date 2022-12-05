@@ -17,12 +17,10 @@ class CustomDocument extends Document {
         <Head>
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" />
-          <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-          />
+          <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
           <link rel="apple-touch-icon" sizes="152x152" href="/images/apple-touch-icon.png" />
           <link rel="shortcut icon" href="/images/favicon.png" />
+          <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"></meta>
         </Head>
         <body>
           <Main />
@@ -52,13 +50,7 @@ CustomDocument.getInitialProps = async (ctx) => {
   const initialProps = await Document.getInitialProps(ctx);
   const emotionStyles = extractCriticalToChunks(initialProps.html);
   const emotionStyleTags = emotionStyles.styles.map((style) => {
-    return (
-      <style
-        key={style.key}
-        dangerouslySetInnerHTML={{ __html: style.css }}
-        data-emotion={`${style.key} ${style.ids.join(" ")}`}
-      />
-    );
+    return <style key={style.key} dangerouslySetInnerHTML={{ __html: style.css }} data-emotion={`${style.key} ${style.ids.join(" ")}`} />;
   });
 
   return {
