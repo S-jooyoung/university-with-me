@@ -1,32 +1,30 @@
 import axios, { AxiosResponse } from "axios";
-import { useEffect, useState } from "react";
+import { useInfiniteQuery } from "react-query";
 
-// ** Types Imports
-import { CompetitionData, GetCompetitionResponse } from "src/@core/layouts/types";
+const usePost = (keyword: string, target: string, sort: string) => {
+  const getPosts = async ({ pageParam = 0 }) => {
+    const response: AxiosResponse<any> = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/${target}/v4`, {
+      params: { keyword, sort, size: 30, page: pageParam },
+    });
 
-const usePost = (keyword: string, target: string, sort: string): GetCompetitionResponse => {
-  const [datas, setDatas] = useState<CompetitionData[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<Error>();
+    let isLast: boolean;
+    response.data.length > 1 ? (isLast = false) : (isLast = true);
 
-  useEffect(() => {
-    setLoading(true);
-    const getPosts = async () => {
-      try {
-        const response: AxiosResponse<any> = await axios.get<GetCompetitionResponse>(`${process.env.NEXT_PUBLIC_API_URL}/${target}/v4`, {
-          params: { keyword, sort },
-        });
-        setDatas(response.data);
-        setLoading(false);
-      } catch (e: any) {
-        setError(e);
-        setLoading(false);
-      }
+    return {
+      result: response.data,
+      nextPage: pageParam + 1,
+      isLast,
     };
-    getPosts();
-  }, [keyword, sort]);
+  };
 
-  return { datas, loading, error };
+  const { data, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, status } = useInfiniteQuery("[universityList]", ({ pageParam = 1 }) => getPosts(pageParam), {
+    getNextPageParam: (lastPage) => {
+      if (lastPage && !lastPage.isLast) return lastPage.nextPage;
+      return undefined;
+    },
+  });
+
+  return { data, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, status };
 };
 
 export default usePost;

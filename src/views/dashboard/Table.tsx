@@ -11,7 +11,7 @@ import Typography from "@mui/material/Typography";
 import TableContainer from "@mui/material/TableContainer";
 
 // ** Types Imports
-import { ThemeColor, CompetitionData, GetCompetitionResponse } from "src/@core/layouts/types";
+import { ThemeColor } from "src/@core/layouts/types";
 import { useState, useEffect } from "react";
 
 const handleCompetitionColor = (competitionRatio: number): ThemeColor => {
@@ -21,16 +21,18 @@ const handleCompetitionColor = (competitionRatio: number): ThemeColor => {
   else return "success";
 };
 
-const DashboardTable = ({ datas, loading, error }: GetCompetitionResponse) => {
-  let [dataParse, setDataParse] = useState<CompetitionData[]>([]);
+const DashboardTable = ({ datas, status }: any) => {
+  let [dataParse, setDataParse] = useState([]);
 
   useEffect(() => {
-    const data = datas.map((data) => {
-      if (data.admissionType) {
-        data.admissionType = data.admissionType.replace(/경쟁률 현황/gi, "");
-      }
-    });
+    // const data = datas.pages.map((data: Object) => {
+    //   if (data.admissionType) {
+    //     data.admissionType = data.admissionType.replace(/경쟁률 현황/gi, "");
+    //   }
+    // });
+    setDataParse(datas);
   }, [datas]);
+
   return (
     <Card>
       <TableContainer>
@@ -46,31 +48,37 @@ const DashboardTable = ({ datas, loading, error }: GetCompetitionResponse) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {datas.map((data: CompetitionData, index) => (
-              <TableRow hover key={index} sx={{ "&:last-of-type td, &:last-of-type th": { border: 0 } }}>
-                <TableCell sx={{ py: (theme) => `${theme.spacing(0.5)} !important` }}>
-                  <Box sx={{ display: "flex", flexDirection: "column" }}>
-                    <Typography sx={{ fontWeight: 500, fontSize: "0.875rem !important" }}>{data.universityName}</Typography>
-                  </Box>
-                </TableCell>
-                <TableCell>{data.admissionType}</TableCell>
-                <TableCell>{data.departmentName}</TableCell>
-                <TableCell align="center">{data.recruitmentCount}</TableCell>
-                <TableCell align="center">{data.applicantsCount}</TableCell>
-                <TableCell align="center">
-                  <Chip
-                    label={`${data.competitionRatio} : 1`}
-                    color={handleCompetitionColor(data.competitionRatio)}
-                    sx={{
-                      height: 24,
-                      fontSize: "0.75rem",
-                      textTransform: "capitalize",
-                      "& .MuiChip-label": { fontWeight: 500 },
-                    }}
-                  />
-                </TableCell>
-              </TableRow>
-            ))}
+            {status == "success" && (
+              <>
+                {datas?.pages.map((group: any, index: any) =>
+                  group.results.map((data: any) => (
+                    <TableRow hover key={index} sx={{ "&:last-of-type td, &:last-of-type th": { border: 0 } }}>
+                      <TableCell sx={{ py: (theme) => `${theme.spacing(0.5)} !important` }}>
+                        <Box sx={{ display: "flex", flexDirection: "column" }}>
+                          <Typography sx={{ fontWeight: 500, fontSize: "0.875rem !important" }}>{data.universityName}</Typography>
+                        </Box>
+                      </TableCell>
+                      <TableCell>{data.admissionType}</TableCell>
+                      <TableCell>{data.departmentName}</TableCell>
+                      <TableCell align="center">{data.recruitmentCount}</TableCell>
+                      <TableCell align="center">{data.applicantsCount}</TableCell>
+                      <TableCell align="center">
+                        <Chip
+                          label={`${data.competitionRatio} : 1`}
+                          color={handleCompetitionColor(data.competitionRatio)}
+                          sx={{
+                            height: 24,
+                            fontSize: "0.75rem",
+                            textTransform: "capitalize",
+                            "& .MuiChip-label": { fontWeight: 500 },
+                          }}
+                        />
+                      </TableCell>
+                    </TableRow>
+                  ))
+                )}
+              </>
+            )}
           </TableBody>
         </Table>
       </TableContainer>

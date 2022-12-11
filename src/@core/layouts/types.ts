@@ -40,24 +40,3 @@ export type LayoutProps = {
   afterVerticalNavMenuContent?: (props?: any) => ReactNode;
   beforeVerticalNavMenuContent?: (props?: any) => ReactNode;
 };
-
-export type CompetitionData = {
-  universityName: string;
-  admissionType: string;
-  departmentName: string;
-  recruitmentCount: number;
-  applicantsCount: number;
-  competitionRatio: number;
-  createdAt: string;
-  updateAt: string;
-};
-
-export type GetCompetitionResponse = {
-  datas: CompetitionData[];
-  loading: boolean;
-  error?: Error;
-};
-
-export type BlankLayoutProps = {
-  children: ReactNode;
-};

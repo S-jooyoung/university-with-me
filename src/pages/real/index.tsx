@@ -19,12 +19,23 @@ import Magnify from "mdi-material-ui/Magnify";
 // ** Custom Hooks
 import usePosts from "src/hooks/usePosts";
 
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import { useObserver } from "src/hooks/useObserver";
+import { bottom } from "@popperjs/core";
 
 export default function Real() {
   const [keyword, setKeyword] = useState("");
+  const htmlBottom = useRef(null);
+
   const [competitionSort, setCompetitionSort] = useState("competitionRatio,DESC");
-  const { datas, loading, error } = usePosts(keyword, "department", competitionSort);
+  const { data, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, status } = usePosts(keyword, "department", competitionSort);
+
+  const onIntersect = ([entry]: any) => entry.isIntersecting && fetchNextPage();
+
+  useObserver({
+    target: bottom,
+    onIntersect,
+  });
 
   const handleEnter = (e: any) => {
     e.preventDefault();
@@ -84,7 +95,11 @@ export default function Real() {
           />
         </Grid>
         <Grid item xs={12}>
-          <Table datas={datas} loading={loading} error={error} />
+          <Table datas={data} status={status} />
+
+          <div ref={htmlBottom}></div>
+
+          {isFetchingNextPage && <p> 계속 불러오는 중</p>}
         </Grid>
       </Grid>
     </ApexChartWrapper>

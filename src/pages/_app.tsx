@@ -30,6 +30,11 @@ import "react-perfect-scrollbar/dist/css/styles.css";
 // ** Global css styles
 import "../../styles/globals.css";
 
+// ** React query
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
+import { useState } from "react";
+
 // ** Extend App Props with Emotion
 type ExtendedAppProps = AppProps & {
   Component: NextPage;
@@ -55,6 +60,8 @@ if (themeConfig.routingLoader) {
 const App = (props: ExtendedAppProps) => {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
+  const [queryClient] = useState(() => new QueryClient());
+
   // Variables
   const getLayout = Component.getLayout ?? ((page) => <UserLayout>{page}</UserLayout>);
 
@@ -70,7 +77,16 @@ const App = (props: ExtendedAppProps) => {
       <SettingsProvider>
         <SettingsConsumer>
           {({ settings }) => {
-            return <ThemeComponent settings={settings}>{getLayout(<Component {...pageProps} />)}</ThemeComponent>;
+            return (
+              <ThemeComponent settings={settings}>
+                {getLayout(
+                  <QueryClientProvider client={queryClient}>
+                    <Component {...pageProps} />
+                    <ReactQueryDevtools initialIsOpen={false} />
+                  </QueryClientProvider>
+                )}
+              </ThemeComponent>
+            );
           }}
         </SettingsConsumer>
       </SettingsProvider>

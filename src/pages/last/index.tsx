@@ -24,7 +24,7 @@ import React, { useState } from "react";
 export default function Last() {
   const [keyword, setKeyword] = useState("");
   const [competitionSort, setCompetitionSort] = useState("competitionRatio,DESC");
-  const { datas, loading, error } = usePosts(keyword, "department/last", competitionSort);
+  // const { datas, loading, error } = usePosts(keyword, "department/last", competitionSort);
 
   const handleEnter = (e: any) => {
     e.preventDefault();
@@ -84,7 +84,7 @@ export default function Last() {
           />
         </Grid>
         <Grid item xs={12}>
-          <Table datas={datas} loading={loading} error={error} />
+          {/* <Table datas={datas} /> */}
         </Grid>
       </Grid>
     </ApexChartWrapper>
