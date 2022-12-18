@@ -1,10 +1,11 @@
 import axios, { AxiosResponse } from "axios";
 import { useInfiniteQuery } from "react-query";
 
-const usePost = (keyword: string, target: string, sort: string) => {
-  const getPosts = async ({ pageParam = 0 }) => {
+const usePost = (keyword: string, target: string, sort: string, degree: string, area: string) => {
+  const getPosts = async (pageParam: number) => {
     const response: AxiosResponse<any> = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/${target}/v4`, {
-      params: { keyword, sort, size: 30, page: pageParam },
+      headers: { "Content-Type": "application/json" },
+      params: { keyword, sort, size: 30, page: pageParam, degree, area },
     });
 
     let isLast: boolean;
@@ -12,19 +13,21 @@ const usePost = (keyword: string, target: string, sort: string) => {
 
     return {
       result: response.data,
-      nextPage: pageParam + 1,
+      pageParam: pageParam + 1,
       isLast,
     };
   };
 
-  const { data, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, status } = useInfiniteQuery("[universityList]", ({ pageParam = 1 }) => getPosts(pageParam), {
+  const { data, fetchNextPage, isFetchingNextPage, status, error } = useInfiniteQuery("[universityList]", ({ pageParam = 0 }) => getPosts(pageParam), {
     getNextPageParam: (lastPage) => {
-      if (lastPage && !lastPage.isLast) return lastPage.nextPage;
+      if (lastPage && !lastPage.isLast) {
+        return Number(lastPage.pageParam);
+      }
       return undefined;
     },
   });
 
-  return { data, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, status };
+  return { data, fetchNextPage, isFetchingNextPage, status, error };
 };
 
 export default usePost;

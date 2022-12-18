@@ -28,14 +28,14 @@ export default function Real() {
   const htmlBottom = useRef(null);
 
   const [competitionSort, setCompetitionSort] = useState("competitionRatio,DESC");
-  const { data, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, status } = usePosts(keyword, "department", competitionSort);
+  // const { data, fetchNextPage, isFetchingNextPage, status } = usePosts(keyword, "department", competitionSort);
 
-  const onIntersect = ([entry]: any) => entry.isIntersecting && fetchNextPage();
+  // const onIntersect = ([entry]: any) => entry.isIntersecting && fetchNextPage();
 
-  useObserver({
-    target: bottom,
-    onIntersect,
-  });
+  // useObserver({
+  //   target: bottom,
+  //   onIntersect,
+  // });
 
   const handleEnter = (e: any) => {
     e.preventDefault();
@@ -95,11 +95,11 @@ export default function Real() {
           />
         </Grid>
         <Grid item xs={12}>
-          <Table datas={data} status={status} />
+          {/* <Table datas={data} status={status} /> */}
 
           <div ref={htmlBottom}></div>
 
-          {isFetchingNextPage && <p> 계속 불러오는 중</p>}
+          {/* {isFetchingNextPage && <p> 계속 불러오는 중</p>} */}
         </Grid>
       </Grid>
     </ApexChartWrapper>

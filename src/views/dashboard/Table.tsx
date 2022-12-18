@@ -21,17 +21,18 @@ const handleCompetitionColor = (competitionRatio: number): ThemeColor => {
   else return "success";
 };
 
-const DashboardTable = ({ datas, status }: any) => {
+const DashboardTable = ({ datas, status, error }: any) => {
   let [dataParse, setDataParse] = useState([]);
 
-  useEffect(() => {
-    // const data = datas.pages.map((data: Object) => {
-    //   if (data.admissionType) {
-    //     data.admissionType = data.admissionType.replace(/경쟁률 현황/gi, "");
-    //   }
-    // });
-    setDataParse(datas);
-  }, [datas]);
+  // useEffect(() => {
+  //   // const data = datas.pages.map((data: Object) => {
+  //   //   if (data.admissionType) {
+  //   //     data.admissionType = data.admissionType.replace(/경쟁률 현황/gi, "");
+  //   //   }
+  //   // });
+  //   setDataParse(datas);
+  //   console.log(datas);
+  // }, [datas]);
 
   return (
     <Card>
@@ -48,10 +49,12 @@ const DashboardTable = ({ datas, status }: any) => {
             </TableRow>
           </TableHead>
           <TableBody>
+            {status === "loading" && <TableRow></TableRow>}
+            {status === "error" && <TableRow>{error.message}</TableRow>}
             {status == "success" && (
               <>
-                {datas?.pages.map((group: any, index: any) =>
-                  group.results.map((data: any) => (
+                {datas?.pages.map((group: any) =>
+                  group.result.map((data: any, index: any) => (
                     <TableRow hover key={index} sx={{ "&:last-of-type td, &:last-of-type th": { border: 0 } }}>
                       <TableCell sx={{ py: (theme) => `${theme.spacing(0.5)} !important` }}>
                         <Box sx={{ display: "flex", flexDirection: "column" }}>
