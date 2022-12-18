@@ -12,7 +12,6 @@ import TableContainer from "@mui/material/TableContainer";
 
 // ** Types Imports
 import { ThemeColor } from "src/@core/layouts/types";
-import { useState, useEffect } from "react";
 
 const handleCompetitionColor = (competitionRatio: number): ThemeColor => {
   if (competitionRatio >= 0.0 && competitionRatio <= 3.2) return "success";
@@ -22,18 +21,6 @@ const handleCompetitionColor = (competitionRatio: number): ThemeColor => {
 };
 
 const DashboardTable = ({ datas, status, error }: any) => {
-  let [dataParse, setDataParse] = useState([]);
-
-  // useEffect(() => {
-  //   // const data = datas.pages.map((data: Object) => {
-  //   //   if (data.admissionType) {
-  //   //     data.admissionType = data.admissionType.replace(/경쟁률 현황/gi, "");
-  //   //   }
-  //   // });
-  //   setDataParse(datas);
-  //   console.log(datas);
-  // }, [datas]);
-
   return (
     <Card>
       <TableContainer>
