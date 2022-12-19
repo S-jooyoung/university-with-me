@@ -27,11 +27,14 @@ const DashboardTable = ({ datas, status, error }: any) => {
         <Table sx={{ minWidth: 800 }} aria-label="table in dashboard">
           <TableHead>
             <TableRow>
-              <TableCell>대학</TableCell>
-              <TableCell>전형</TableCell>
-              <TableCell>모집학과</TableCell>
-              <TableCell align="center">모집인원</TableCell>
-              <TableCell align="center">지원인원</TableCell>
+              <TableCell sx={{ minWidth: 150 }}>대학</TableCell>
+              <TableCell>전형명﹒모집단위</TableCell>
+              <TableCell align="center" sx={{ minWidth: 150 }}>
+                모집인원
+              </TableCell>
+              <TableCell align="center" sx={{ minWidth: 150 }}>
+                지원인원
+              </TableCell>
               <TableCell align="center">경쟁률</TableCell>
             </TableRow>
           </TableHead>
@@ -45,11 +48,14 @@ const DashboardTable = ({ datas, status, error }: any) => {
                     <TableRow hover key={index} sx={{ "&:last-of-type td, &:last-of-type th": { border: 0 } }}>
                       <TableCell sx={{ py: (theme) => `${theme.spacing(0.5)} !important` }}>
                         <Box sx={{ display: "flex", flexDirection: "column" }}>
-                          <Typography sx={{ fontWeight: 500, fontSize: "0.875rem !important" }}>{data.universityName}</Typography>
+                          <Typography sx={{ fontWeight: 700 }}>{data.universityName}</Typography>
                         </Box>
                       </TableCell>
-                      <TableCell>{data.admissionType}</TableCell>
-                      <TableCell>{data.departmentName}</TableCell>
+                      <TableCell>
+                        <Typography sx={{ fontWeight: 700 }}>{data.admissionType}</Typography>
+                        {data.departmentName}
+                      </TableCell>
+
                       <TableCell align="center">{data.recruitmentCount}</TableCell>
                       <TableCell align="center">{data.applicantsCount}</TableCell>
                       <TableCell align="center">
@@ -59,6 +65,7 @@ const DashboardTable = ({ datas, status, error }: any) => {
                           sx={{
                             height: 24,
                             fontSize: "0.75rem",
+                            minWidth: "67px",
                             textTransform: "capitalize",
                             "& .MuiChip-label": { fontWeight: 500 },
                           }}
