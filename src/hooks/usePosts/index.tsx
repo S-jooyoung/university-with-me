@@ -9,6 +9,7 @@ const usePost = (keyword: string, target: string, sort: string, degree: string, 
     });
 
     let isLast: boolean;
+
     response.data.length > 1 ? (isLast = false) : (isLast = true);
 
     return {
@@ -18,7 +19,7 @@ const usePost = (keyword: string, target: string, sort: string, degree: string, 
     };
   };
 
-  const { data, fetchNextPage, isFetchingNextPage, status, error } = useInfiniteQuery("[universityList]", ({ pageParam = 0 }) => getPosts(pageParam), {
+  const { data, fetchNextPage, isFetchingNextPage, status, error, refetch } = useInfiniteQuery("[universityList]", ({ pageParam = 0 }) => getPosts(pageParam), {
     getNextPageParam: (lastPage) => {
       if (lastPage && !lastPage.isLast) {
         return Number(lastPage.pageParam);
@@ -27,7 +28,7 @@ const usePost = (keyword: string, target: string, sort: string, degree: string, 
     },
   });
 
-  return { data, fetchNextPage, isFetchingNextPage, status, error };
+  return { data, fetchNextPage, isFetchingNextPage, status, error, refetch };
 };
 
 export default usePost;
