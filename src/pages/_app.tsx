@@ -33,7 +33,6 @@ import "../../styles/globals.css";
 // ** React query
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
-import { useState } from "react";
 
 // ** Extend App Props with Emotion
 type ExtendedAppProps = AppProps & {
@@ -43,24 +42,20 @@ type ExtendedAppProps = AppProps & {
 
 const clientSideEmotionCache = createEmotionCache();
 
-// ** Pace Loader
-if (themeConfig.routingLoader) {
-  Router.events.on("routeChangeStart", () => {
-    NProgress.start();
-  });
-  Router.events.on("routeChangeError", () => {
-    NProgress.done();
-  });
-  Router.events.on("routeChangeComplete", () => {
-    NProgress.done();
-  });
-}
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      refetchOnMount: false,
+      staleTime: 60 * 1000,
+      enabled: false,
+    },
+  },
+});
 
 // ** Configure JSS & ClassName
 const App = (props: ExtendedAppProps) => {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
-
-  const [queryClient] = useState(() => new QueryClient());
 
   // Variables
   const getLayout = Component.getLayout ?? ((page) => <UserLayout>{page}</UserLayout>);
