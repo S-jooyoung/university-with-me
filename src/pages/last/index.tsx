@@ -19,18 +19,18 @@ import Magnify from "mdi-material-ui/Magnify";
 // ** Custom Hooks
 import usePosts from "src/hooks/usePosts";
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useObserver } from "src/hooks/useObserver";
 
 export default function Last() {
   const [keyword, setKeyword] = useState("");
-  const [competition, setCompetition] = useState("");
-  const [degree, setUDegree] = useState("4년제");
+  const [competition, setCompetition] = useState("competitionRatio,DESC");
+  const [degree, setDegree] = useState("4년제");
   const [area, setArea] = useState("서울");
 
   const bottom: React.MutableRefObject<null> = useRef(null);
 
-  const { data, fetchNextPage, isFetchingNextPage, status, error } = usePosts(keyword, "department/last", competition, degree, area);
+  const { data, fetchNextPage, isFetchingNextPage, status, error, refetch } = usePosts(keyword, "department/last", competition, degree, area);
 
   const handleEnter = (e: any) => {
     e.preventDefault();
@@ -44,13 +44,17 @@ export default function Last() {
 
   const handleChangeDegree = (e: SelectChangeEvent) => {
     e.preventDefault();
-    setUDegree(e.target.value as string);
+    setDegree(e.target.value as string);
   };
 
   const handleChangeArea = (e: SelectChangeEvent) => {
     e.preventDefault();
     setArea(e.target.value as string);
   };
+
+  useEffect(() => {
+    refetch();
+  }, [keyword, competition, degree, area]);
 
   const onIntersect = ([entry]: any) => entry.isIntersecting && fetchNextPage();
 
@@ -65,7 +69,7 @@ export default function Last() {
         <Grid item xs={4} sm={4}>
           <FormControl fullWidth>
             <InputLabel>경쟁률</InputLabel>
-            <Select label="competition" defaultValue={competition} onChange={handleChangeCompetition}>
+            <Select label="competition" value={competition} onChange={handleChangeCompetition}>
               <MenuItem value="competitionRatio,DESC">높은순</MenuItem>
               <MenuItem value="competitionRatio,ASC">낮은순</MenuItem>
             </Select>
@@ -74,7 +78,7 @@ export default function Last() {
         <Grid item xs={4} sm={4}>
           <FormControl fullWidth>
             <InputLabel>대학별</InputLabel>
-            <Select label="university" defaultValue={degree} onChange={handleChangeDegree}>
+            <Select label="university" value={degree} onChange={handleChangeDegree}>
               <MenuItem value="4년제">4년제</MenuItem>
               <MenuItem value="2년제">2년제</MenuItem>
             </Select>
@@ -83,25 +87,25 @@ export default function Last() {
         <Grid item xs={4} sm={4}>
           <FormControl fullWidth>
             <InputLabel>지역</InputLabel>
-            <Select label="region" defaultValue={area} onChange={handleChangeArea}>
+            <Select label="region" value={area} onChange={handleChangeArea}>
               <MenuItem value="서울">서울</MenuItem>
               <MenuItem value="경기">경기</MenuItem>
-              <MenuItem value="경기">경남</MenuItem>
-              <MenuItem value="경기">강원</MenuItem>
-              <MenuItem value="경기">충북</MenuItem>
-              <MenuItem value="경기">충남</MenuItem>
-              <MenuItem value="경기">대구</MenuItem>
-              <MenuItem value="경기">경북</MenuItem>
-              <MenuItem value="경기">부산</MenuItem>
-              <MenuItem value="경기">세종</MenuItem>
-              <MenuItem value="경기">광주</MenuItem>
-              <MenuItem value="경기">전북</MenuItem>
-              <MenuItem value="경기">충북</MenuItem>
-              <MenuItem value="경기">전남</MenuItem>
-              <MenuItem value="경기">대전</MenuItem>
-              <MenuItem value="경기">울산</MenuItem>
-              <MenuItem value="경기">인천</MenuItem>
-              <MenuItem value="경기">제주</MenuItem>
+              <MenuItem value="경남">경남</MenuItem>
+              <MenuItem value="강원">강원</MenuItem>
+              <MenuItem value="충북">충북</MenuItem>
+              <MenuItem value="충남">충남</MenuItem>
+              <MenuItem value="대구">대구</MenuItem>
+              <MenuItem value="경북">경북</MenuItem>
+              <MenuItem value="부산">부산</MenuItem>
+              <MenuItem value="세종">세종</MenuItem>
+              <MenuItem value="광주">광주</MenuItem>
+              <MenuItem value="전북">전북</MenuItem>
+              <MenuItem value="충북">충북</MenuItem>
+              <MenuItem value="전남">전남</MenuItem>
+              <MenuItem value="대전">대전</MenuItem>
+              <MenuItem value="울산">울산</MenuItem>
+              <MenuItem value="인천">인천</MenuItem>
+              <MenuItem value="제주">제주</MenuItem>
             </Select>
           </FormControl>
         </Grid>
