@@ -4,6 +4,7 @@ import { ReactNode, useRef, useState } from "react";
 // ** MUI Import
 import List from "@mui/material/List";
 import Box, { BoxProps } from "@mui/material/Box";
+import Link from "@mui/material/Link";
 import { styled, useTheme } from "@mui/material/styles";
 
 // ** Third Party Components
@@ -92,6 +93,18 @@ const Navigation = (props: Props) => {
             )}
           </Box>
         </ScrollWrapper>
+      </Box>
+      <Box
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          alignItems: "center",
+          "& :not(:last-child)": { mr: 4 },
+          margin: "16px",
+        }}>
+        <Link target="_blank" href="mailto:jooyoung.dev@gmail.com?subject=대학나와 관련 문의합니다.">
+          문의
+        </Link>
       </Box>
       {afterVerticalNavMenuContent ? afterVerticalNavMenuContent(props) : null}
     </Drawer>

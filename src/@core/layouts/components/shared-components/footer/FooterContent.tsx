@@ -1,14 +1,9 @@
 // ** MUI Imports
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
-import { Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
-import useMediaQuery from "@mui/material/useMediaQuery";
 
 const FooterContent = () => {
-  // ** Var
-  const hidden = useMediaQuery((theme: Theme) => theme.breakpoints.down("md"));
-
   return (
     <Box
       sx={{
@@ -27,19 +22,6 @@ const FooterContent = () => {
           S-jooyoung
         </Link>
       </Typography>
-      {hidden ? null : (
-        <Box
-          sx={{
-            display: "flex",
-            flexWrap: "wrap",
-            alignItems: "center",
-            "& :not(:last-child)": { mr: 4 },
-          }}>
-          <Link target="_blank" href="mailto:jooyoung.dev@gmail.com?subject=문의드립니다.">
-            문의
-          </Link>
-        </Box>
-      )}
     </Box>
   );
 };

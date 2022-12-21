@@ -32,7 +32,6 @@ import "../../styles/globals.css";
 
 // ** React query
 import { QueryClient, QueryClientProvider } from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
 
 // ** Extend App Props with Emotion
 type ExtendedAppProps = AppProps & {
@@ -77,7 +76,7 @@ const App = (props: ExtendedAppProps) => {
                 {getLayout(
                   <QueryClientProvider client={queryClient}>
                     <Component {...pageProps} />
-                    <ReactQueryDevtools initialIsOpen={false} />
+                    {/* <ReactQueryDevtools initialIsOpen={false} /> */}
                   </QueryClientProvider>
                 )}
               </ThemeComponent>
