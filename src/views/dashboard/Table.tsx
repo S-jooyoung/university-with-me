@@ -27,15 +27,17 @@ const DashboardTable = ({ datas, status, error }: any) => {
         <Table sx={{ minWidth: 800 }} aria-label="table in dashboard">
           <TableHead>
             <TableRow>
-              <TableCell sx={{ minWidth: 150 }}>대학</TableCell>
+              <TableCell sx={{ width: 200 }}>대학</TableCell>
               <TableCell>전형명﹒모집단위</TableCell>
-              <TableCell align="center" sx={{ minWidth: 150 }}>
+              <TableCell align="center" sx={{ width: 80 }}>
                 모집인원
               </TableCell>
-              <TableCell align="center" sx={{ minWidth: 150 }}>
+              <TableCell align="center" sx={{ width: 80 }}>
                 지원인원
               </TableCell>
-              <TableCell align="center">경쟁률</TableCell>
+              <TableCell align="center" sx={{ width: 150 }}>
+                경쟁률
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

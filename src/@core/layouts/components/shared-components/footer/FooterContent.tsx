@@ -35,11 +35,6 @@ const FooterContent = () => {
             alignItems: "center",
             "& :not(:last-child)": { mr: 4 },
           }}>
-          <Link
-            target="_blank"
-            href="https://github.com/themeselection/materio-mui-react-nextjs-admin-template-free/blob/main/README.md">
-            이슈
-          </Link>
           <Link target="_blank" href="mailto:jooyoung.dev@gmail.com?subject=문의드립니다.">
             문의
           </Link>
