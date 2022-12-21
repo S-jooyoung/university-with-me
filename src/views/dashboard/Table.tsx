@@ -54,8 +54,8 @@ const DashboardTable = ({ datas, status, error }: any) => {
                         </Box>
                       </TableCell>
                       <TableCell>
-                        <Typography sx={{ fontWeight: 700 }}>{data.admissionType}</Typography>
-                        {data.departmentName}
+                        <Typography sx={{ fontWeight: 700 }}>{data.departmentName}</Typography>
+                        {data.admissionType}
                       </TableCell>
 
                       <TableCell align="center">{data.recruitmentCount}</TableCell>
