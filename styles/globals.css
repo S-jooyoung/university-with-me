@@ -3,12 +3,19 @@
 @tailwind utilities;
 
 html,
-body {
-  min-height: 100%;
+body,
+body > div:first-child,
+div#__next,
+div#__next > div {
+  height: 100%;
 }
 
 #__next {
-  height: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 code {
