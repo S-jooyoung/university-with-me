@@ -9,6 +9,8 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import Typography from "@mui/material/Typography";
 import TableContainer from "@mui/material/TableContainer";
+import Alert from "@mui/material/Alert";
+import LinearProgress from "@mui/material/LinearProgress";
 
 // ** Types Imports
 import { ThemeColor } from "src/@core/layouts/types";
@@ -41,12 +43,25 @@ const DashboardTable = ({ datas, status, error }: any) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {status === "loading" && <TableRow></TableRow>}
-            {status === "error" && <TableRow>{error.message}</TableRow>}
+            {status === "loading" && (
+              <TableRow>
+                <TableCell colSpan={5}>
+                  <LinearProgress />
+                </TableCell>
+              </TableRow>
+            )}
+
+            {status === "error" && (
+              <TableRow>
+                <TableCell colSpan={5}>
+                  <Alert severity="error">데이터를 불러올 수 없습니다.</Alert>
+                </TableCell>
+              </TableRow>
+            )}
             {status == "success" && (
               <>
                 {datas?.pages.map((group: any) =>
-                  group.result.map((data: any, index: any) => (
+                  group.result.list.map((data: any, index: any) => (
                     <TableRow hover key={index} sx={{ "&:last-of-type td, &:last-of-type th": { border: 0 } }}>
                       <TableCell sx={{ py: (theme) => `${theme.spacing(0.5)} !important` }}>
                         <Box sx={{ display: "flex", flexDirection: "column" }}>

@@ -1,16 +1,16 @@
 import axios, { AxiosResponse } from "axios";
 import { useInfiniteQuery } from "react-query";
 
-const usePost = (keyword: string, target: string, sort: string, degree: string, area: string) => {
+const usePost = (queryKey: string, keyword: string, target: string, sort: string, degree: string, area: string) => {
   const getPosts = async (pageParam: number) => {
-    const response: AxiosResponse<any> = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/${target}/v4`, {
+    const response: AxiosResponse<any> = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}${target}`, {
       headers: { "Content-Type": "application/json" },
-      params: { keyword, sort, size: 30, page: pageParam, degree, area },
+      params: { keyword, size: 30 },
     });
 
     let isLast: boolean;
 
-    response.data.length > 1 ? (isLast = false) : (isLast = true);
+    response.data.list.length > 1 ? (isLast = false) : (isLast = true);
 
     return {
       result: response.data,
@@ -19,7 +19,7 @@ const usePost = (keyword: string, target: string, sort: string, degree: string, 
     };
   };
 
-  const { data, fetchNextPage, isFetchingNextPage, status, error, refetch } = useInfiniteQuery("[universityList]", ({ pageParam = 0 }) => getPosts(pageParam), {
+  const { data, fetchNextPage, isFetchingNextPage, status, error, refetch } = useInfiniteQuery(queryKey, ({ pageParam = 0 }) => getPosts(pageParam), {
     getNextPageParam: (lastPage) => {
       if (lastPage && !lastPage.isLast) {
         return Number(lastPage.pageParam);

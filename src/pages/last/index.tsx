@@ -6,6 +6,7 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
+import Skeleton from "@mui/material/Skeleton";
 
 // ** Styled Component Import
 import ApexChartWrapper from "src/@core/styles/libs/react-apexcharts";
@@ -30,7 +31,7 @@ export default function Last() {
 
   const bottom: React.MutableRefObject<null> = useRef(null);
 
-  const { data, fetchNextPage, isFetchingNextPage, status, error, refetch } = usePosts(keyword, "department/last", competition, degree, area);
+  const { data, fetchNextPage, isFetchingNextPage, status, error, refetch } = usePosts("[last]", keyword, "department/last", competition, degree, area);
 
   const handleEnter = (e: any) => {
     e.preventDefault();
@@ -126,10 +127,12 @@ export default function Last() {
             }}
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} sm={12}>
           <Table datas={data} status={status} error={error} />
           <div ref={bottom} />
-          {isFetchingNextPage && <p>계속 불러오는 중</p>}
+        </Grid>
+        <Grid item xs={12} sm={12}>
+          {isFetchingNextPage && <Skeleton variant="rectangular" height={60} />}
         </Grid>
       </Grid>
     </ApexChartWrapper>
