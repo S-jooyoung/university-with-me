@@ -40,17 +40,17 @@ export default function Last() {
 
   const handleChangeCompetition = (e: SelectChangeEvent) => {
     e.preventDefault();
-    // setCompetition(e.target.value as string);
+    setCompetition(e.target.value as string);
   };
 
   const handleChangeDegree = (e: SelectChangeEvent) => {
     e.preventDefault();
-    // setDegree(e.target.value as string);
+    setDegree(e.target.value as string);
   };
 
   const handleChangeArea = (e: SelectChangeEvent) => {
     e.preventDefault();
-    // setArea(e.target.value as string);
+    setArea(e.target.value as string);
   };
 
   useEffect(() => {
@@ -66,11 +66,11 @@ export default function Last() {
 
   return (
     <ApexChartWrapper>
-      <Grid container spacing={6}>
-        <Temporary />
-      </Grid>
-
       {/* <Grid container spacing={6}>
+        <Temporary />
+      </Grid> */}
+
+      <Grid container spacing={6}>
         <Grid item xs={4} sm={4}>
           <FormControl fullWidth>
             <InputLabel>경쟁률</InputLabel>
@@ -84,8 +84,8 @@ export default function Last() {
           <FormControl fullWidth>
             <InputLabel>대학별</InputLabel>
             <Select label="university" value={degree} onChange={handleChangeDegree}>
-              <MenuItem value="4년제">4년제</MenuItem>
-              <MenuItem value="2년제">2년제</MenuItem>
+              <MenuItem value="4년제">대학교</MenuItem>
+              <MenuItem value="전문대">전문대학교</MenuItem>
             </Select>
           </FormControl>
         </Grid>
@@ -136,7 +136,7 @@ export default function Last() {
           <div ref={bottom} />
           {isFetchingNextPage && <p>계속 불러오는 중</p>}
         </Grid>
-      </Grid> */}
+      </Grid>
     </ApexChartWrapper>
   );
 }

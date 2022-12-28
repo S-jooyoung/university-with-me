@@ -31,7 +31,7 @@ export default function Last() {
 
   const bottom: React.MutableRefObject<null> = useRef(null);
 
-  const { data, fetchNextPage, isFetchingNextPage, status, error, refetch } = usePosts("[last]", keyword, "department/last", competition, degree, area);
+  const { data, fetchNextPage, isFetchingNextPage, status, error, refetch } = usePosts("[last]", keyword, "last/department", competition, degree, area);
 
   const handleEnter = (e: any) => {
     e.preventDefault();
@@ -80,8 +80,8 @@ export default function Last() {
           <FormControl fullWidth>
             <InputLabel>대학별</InputLabel>
             <Select label="university" value={degree} onChange={handleChangeDegree}>
-              <MenuItem value="4년제">4년제</MenuItem>
-              <MenuItem value="2년제">2년제</MenuItem>
+              <MenuItem value="4년제">대학교</MenuItem>
+              <MenuItem value="전문대">전문대학교</MenuItem>
             </Select>
           </FormControl>
         </Grid>

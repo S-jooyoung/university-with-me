@@ -5,7 +5,7 @@ const usePost = (queryKey: string, keyword: string, target: string, sort: string
   const getPosts = async (pageParam: number) => {
     const response: AxiosResponse<any> = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}${target}`, {
       headers: { "Content-Type": "application/json" },
-      params: { keyword, size: 30 },
+      params: { keyword, size: 30, sort, degree, area },
     });
 
     let isLast: boolean;
