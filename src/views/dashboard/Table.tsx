@@ -11,6 +11,7 @@ import Typography from "@mui/material/Typography";
 import TableContainer from "@mui/material/TableContainer";
 import Alert from "@mui/material/Alert";
 import LinearProgress from "@mui/material/LinearProgress";
+import { MobileOnlyView, BrowserView } from "react-device-detect";
 
 // ** Types Imports
 import { ThemeColor } from "src/@core/layouts/types";
@@ -26,7 +27,70 @@ const DashboardTable = ({ datas, status, error }: any) => {
   return (
     <Card>
       <TableContainer>
-        <Table sx={{ minWidth: 800 }} aria-label="table in dashboard">
+        <MobileOnlyView>
+          <Table sx={{ minWidth: 350 }} aria-label="table in dashboard">
+            <TableHead>
+              <TableRow>
+                <TableCell>대학﹒전형명﹒모집단위</TableCell>
+                <TableCell align="center">
+                  <p>모집</p>
+                  <p>-</p>
+                  <p>지원</p>
+                </TableCell>
+                <TableCell align="center">경쟁률</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {status === "loading" && (
+                <TableRow>
+                  <TableCell colSpan={3}>
+                    <LinearProgress />
+                  </TableCell>
+                </TableRow>
+              )}
+              {status === "error" && (
+                <TableRow>
+                  <TableCell colSpan={3}>
+                    <Alert severity="error">데이터를 불러올 수 없습니다.</Alert>
+                  </TableCell>
+                </TableRow>
+              )}
+              {status == "success" && (
+                <>
+                  {datas?.pages.map((group: any) =>
+                    group.result.list.map((data: any, index: any) => (
+                      <TableRow hover key={index} sx={{ "&:last-of-type td, &:last-of-type th": { border: 0 } }}>
+                        <TableCell>
+                          <Typography sx={{ fontWeight: 700 }}>{data.universityName}</Typography>
+                          <Typography>{data.departmentName}</Typography>
+                          {data.admissionType}
+                        </TableCell>
+                        <TableCell align="center">
+                          <p>{data.recruitmentCount}</p>-<p>{data.applicantsCount}</p>
+                        </TableCell>
+                        <TableCell align="center">
+                          <Chip
+                            label={`${data.competitionRatio} : 1`}
+                            color={handleCompetitionColor(data.competitionRatio)}
+                            sx={{
+                              height: 24,
+                              fontSize: "0.75rem",
+                              minWidth: "67px",
+                              textTransform: "capitalize",
+                              "& .MuiChip-label": { fontWeight: 500 },
+                            }}
+                          />
+                        </TableCell>
+                      </TableRow>
+                    ))
+                  )}
+                </>
+              )}
+            </TableBody>
+          </Table>
+        </MobileOnlyView>
+
+        <Table>
           <TableHead>
             <TableRow>
               <TableCell sx={{ width: 200 }}>대학</TableCell>
