@@ -6,6 +6,11 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
+import Typography from "@mui/material/Typography";
+import Alert from "@mui/material/Alert";
+
+import moment from "moment";
+import "moment/locale/ko";
 
 // ** Styled Component Import
 import ApexChartWrapper from "src/@core/styles/libs/react-apexcharts";
@@ -32,6 +37,10 @@ export default function Last() {
   const bottom: React.MutableRefObject<null> = useRef(null);
 
   const { data, fetchNextPage, isFetchingNextPage, status, error, refetch } = usePosts("[real]", keyword, "department", competition, degree, area);
+
+  const date = new Date(data?.pages[0].result.endTime);
+
+  const endTime = moment(date).calendar();
 
   const handleEnter = (e: any) => {
     e.preventDefault();
@@ -66,11 +75,11 @@ export default function Last() {
 
   return (
     <ApexChartWrapper>
-      {/* <Grid container spacing={6}>
-        <Temporary />
-      </Grid> */}
-
       <Grid container spacing={6}>
+        <Temporary />
+      </Grid>
+
+      {/* <Grid container spacing={6}>
         <Grid item xs={4} sm={4}>
           <FormControl fullWidth>
             <InputLabel>경쟁률</InputLabel>
@@ -84,8 +93,8 @@ export default function Last() {
           <FormControl fullWidth>
             <InputLabel>대학별</InputLabel>
             <Select label="university" value={degree} onChange={handleChangeDegree}>
-              <MenuItem value="4년제">대학교</MenuItem>
-              <MenuItem value="전문대">전문대학교</MenuItem>
+              <MenuItem value="4년제">4년제</MenuItem>
+              <MenuItem value="전문대">전문대</MenuItem>
             </Select>
           </FormControl>
         </Grid>
@@ -131,12 +140,17 @@ export default function Last() {
             }}
           />
         </Grid>
+        <Grid item xs={12} sm={12}>
+          <Alert icon={false} sx={{ backgroundColor: "#9155FD", color: "white", fontWeight: 600 }}>
+            {endTime} 실시간 현황
+          </Alert>
+        </Grid>
         <Grid item xs={12}>
           <Table datas={data} status={status} error={error} />
           <div ref={bottom} />
-          {isFetchingNextPage && <p>계속 불러오는 중</p>}
         </Grid>
-      </Grid>
+        {isFetchingNextPage && <p>계속 불러오는 중</p>}
+      </Grid> */}
     </ApexChartWrapper>
   );
 }

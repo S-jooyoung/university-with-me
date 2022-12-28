@@ -80,8 +80,8 @@ export default function Last() {
           <FormControl fullWidth>
             <InputLabel>대학별</InputLabel>
             <Select label="university" value={degree} onChange={handleChangeDegree}>
-              <MenuItem value="4년제">대학교</MenuItem>
-              <MenuItem value="전문대">전문대학교</MenuItem>
+              <MenuItem value="4년제">4년제</MenuItem>
+              <MenuItem value="전문대">전문대</MenuItem>
             </Select>
           </FormControl>
         </Grid>
@@ -132,7 +132,7 @@ export default function Last() {
           <div ref={bottom} />
         </Grid>
         <Grid item xs={12} sm={12}>
-          {isFetchingNextPage && <Skeleton variant="rectangular" height={60} />}
+          {isFetchingNextPage && <Skeleton />}
         </Grid>
       </Grid>
     </ApexChartWrapper>
