@@ -11,7 +11,7 @@ import Typography from "@mui/material/Typography";
 import TableContainer from "@mui/material/TableContainer";
 import Alert from "@mui/material/Alert";
 import LinearProgress from "@mui/material/LinearProgress";
-import { MobileOnlyView, BrowserView } from "react-device-detect";
+import { MobileOnlyView } from "react-device-detect";
 
 // ** Types Imports
 import { ThemeColor } from "src/@core/layouts/types";

@@ -76,10 +76,6 @@ export default function Last() {
   return (
     <ApexChartWrapper>
       <Grid container spacing={6}>
-        <Temporary />
-      </Grid>
-
-      {/* <Grid container spacing={6}>
         <Grid item xs={4} sm={4}>
           <FormControl fullWidth>
             <InputLabel>경쟁률</InputLabel>
@@ -150,7 +146,7 @@ export default function Last() {
           <div ref={bottom} />
         </Grid>
         {isFetchingNextPage && <p>계속 불러오는 중</p>}
-      </Grid> */}
+      </Grid>
     </ApexChartWrapper>
   );
 }

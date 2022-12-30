@@ -1,9 +1,10 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function LandingPage() {
   return (
-    <div className="h-full relative overflow-hidden ">
-      <div className="flex items-center h-full bg-white pt-24 pb-28  sm:pt-16 lg:overflow-hidden lg:pt-40 lg:pb-40">
+    <div className="h-screen relative overflow-hidden ">
+      <div className="flex items-center h-full bg-white">
         <div className="mx-auto max-w-5xl lg:px-8">
           <div className="lg:grid lg:grid-cols-2 lg:gap-8">
             <div className="mx-auto max-w-md px-4 text-center sm:max-w-2xl sm:px-6 lg:flex lg:items-center lg:px-0 lg:text-left">
@@ -21,7 +22,7 @@ export default function LandingPage() {
               </div>
             </div>
             <div className="mt-12 hidden lg:block ">
-              <img src="/images/cards/page.png" alt="" className="w-full" />
+              <Image src="/images/cards/landing.svg" alt="landing" width={600} height={500} />
             </div>
           </div>
         </div>

@@ -31,6 +31,34 @@ import "../../styles/globals.css";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 
+import { DefaultSeo } from "next-seo";
+
+const DEFAULT_SEO = {
+  title: "대학나와 | 실시간 정시 경쟁률 서비스",
+  description: "대학별 실시간 경쟁률 제공, 정시 경쟁률 제공",
+  canonical: "https://daehagnawa.site/",
+  openGraph: {
+    type: "website",
+    locale: "ko_KR",
+    url: "https://daehagnawa.site/",
+    title: "대학나와 | 실시간 정시 경쟁률 서비스",
+    site_name: "대학나와",
+    images: [
+      {
+        url: "카카오톡, 페이스북에에 링크 넣으면 올라올 이미지",
+        width: 285,
+        height: 167,
+        alt: "이미지",
+      },
+    ],
+  },
+  twitter: {
+    handle: "@handle",
+    site: "@site",
+    cardType: "summary_large_image",
+  },
+};
+
 // ** Extend App Props with Emotion
 type ExtendedAppProps = AppProps & {
   Component: NextPage;
