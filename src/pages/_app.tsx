@@ -48,7 +48,7 @@ const DEFAULT_SEO = {
         url: "카카오톡, 페이스북에에 링크 넣으면 올라올 이미지",
         width: 285,
         height: 167,
-        alt: "이미지",
+        alt: "대학나와 SNS 이미지",
       },
     ],
   },
@@ -87,13 +87,6 @@ const App = (props: ExtendedAppProps) => {
 
   return (
     <CacheProvider value={emotionCache}>
-      <Head>
-        <title>{`${themeConfig.templateName} - 실시간 대학 경쟁률 확인 사이트`}</title>
-        <meta name="description" content={`${themeConfig.templateName}  실시간 대학 경쟁률 확인 사이트`} />
-        <meta name="keywords" content="실시간 대학 경쟁률 확인 사이트" />
-        <meta name="viewport" content="initial-scale=1, width=device-width" />
-      </Head>
-
       <SettingsProvider>
         <SettingsConsumer>
           {({ settings }) => {
@@ -101,6 +94,7 @@ const App = (props: ExtendedAppProps) => {
               <ThemeComponent settings={settings}>
                 {getLayout(
                   <QueryClientProvider client={queryClient}>
+                    <DefaultSeo {...DEFAULT_SEO} />
                     <Component {...pageProps} />
                     <ReactQueryDevtools initialIsOpen={false} />
                   </QueryClientProvider>
