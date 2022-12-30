@@ -26,7 +26,6 @@ import usePosts from "src/hooks/usePosts";
 
 import React, { useEffect, useRef, useState } from "react";
 import { useObserver } from "src/hooks/useObserver";
-import Temporary from "src/views/temporary";
 
 export default function Last() {
   const [keyword, setKeyword] = useState("");
@@ -136,12 +135,12 @@ export default function Last() {
             }}
           />
         </Grid>
-        <Grid item xs={12} sm={12}>
-          <Alert icon={false} sx={{ backgroundColor: "#9155FD", color: "white", fontWeight: 600 }}>
+        <Grid item xs="auto" sm="auto" justifyContent="flex-end" direction="row" rowSpacing={0}>
+          <Alert icon={false} sx={{ backgroundColor: "#a883ed", color: "white", fontWeight: 600 }}>
             {endTime} 실시간 현황
           </Alert>
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ paddingTop: "0" }}>
           <Table datas={data} status={status} error={error} />
           <div ref={bottom} />
         </Grid>

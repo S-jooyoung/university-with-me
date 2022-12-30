@@ -11,7 +11,7 @@ import Typography from "@mui/material/Typography";
 import TableContainer from "@mui/material/TableContainer";
 import Alert from "@mui/material/Alert";
 import LinearProgress from "@mui/material/LinearProgress";
-import { MobileOnlyView } from "react-device-detect";
+import { MobileOnlyView, BrowserView } from "react-device-detect";
 
 // ** Types Imports
 import { ThemeColor } from "src/@core/layouts/types";
@@ -90,75 +90,77 @@ const DashboardTable = ({ datas, status, error }: any) => {
           </Table>
         </MobileOnlyView>
 
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell sx={{ width: 200 }}>대학</TableCell>
-              <TableCell>전형명﹒모집단위</TableCell>
-              <TableCell align="center" sx={{ width: 80 }}>
-                모집인원
-              </TableCell>
-              <TableCell align="center" sx={{ width: 80 }}>
-                지원인원
-              </TableCell>
-              <TableCell align="center" sx={{ width: 150 }}>
-                경쟁률
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {status === "loading" && (
+        <BrowserView>
+          <Table>
+            <TableHead>
               <TableRow>
-                <TableCell colSpan={5}>
-                  <LinearProgress />
+                <TableCell sx={{ width: 200 }}>대학</TableCell>
+                <TableCell>전형명﹒모집단위</TableCell>
+                <TableCell align="center" sx={{ width: 80 }}>
+                  모집인원
+                </TableCell>
+                <TableCell align="center" sx={{ width: 80 }}>
+                  지원인원
+                </TableCell>
+                <TableCell align="center" sx={{ width: 150 }}>
+                  경쟁률
                 </TableCell>
               </TableRow>
-            )}
+            </TableHead>
+            <TableBody>
+              {status === "loading" && (
+                <TableRow>
+                  <TableCell colSpan={5}>
+                    <LinearProgress />
+                  </TableCell>
+                </TableRow>
+              )}
 
-            {status === "error" && (
-              <TableRow>
-                <TableCell colSpan={5}>
-                  <Alert severity="error">데이터를 불러올 수 없습니다.</Alert>
-                </TableCell>
-              </TableRow>
-            )}
-            {status == "success" && (
-              <>
-                {datas?.pages.map((group: any) =>
-                  group.result.list.map((data: any, index: any) => (
-                    <TableRow hover key={index} sx={{ "&:last-of-type td, &:last-of-type th": { border: 0 } }}>
-                      <TableCell sx={{ py: (theme) => `${theme.spacing(0.5)} !important` }}>
-                        <Box sx={{ display: "flex", flexDirection: "column" }}>
-                          <Typography sx={{ fontWeight: 700 }}>{data.universityName}</Typography>
-                        </Box>
-                      </TableCell>
-                      <TableCell>
-                        <Typography sx={{ fontWeight: 700 }}>{data.departmentName}</Typography>
-                        {data.admissionType}
-                      </TableCell>
+              {status === "error" && (
+                <TableRow>
+                  <TableCell colSpan={5}>
+                    <Alert severity="error">데이터를 불러올 수 없습니다.</Alert>
+                  </TableCell>
+                </TableRow>
+              )}
+              {status == "success" && (
+                <>
+                  {datas?.pages.map((group: any) =>
+                    group.result.list.map((data: any, index: any) => (
+                      <TableRow hover key={index} sx={{ "&:last-of-type td, &:last-of-type th": { border: 0 } }}>
+                        <TableCell sx={{ py: (theme) => `${theme.spacing(0.5)} !important` }}>
+                          <Box sx={{ display: "flex", flexDirection: "column" }}>
+                            <Typography sx={{ fontWeight: 700 }}>{data.universityName}</Typography>
+                          </Box>
+                        </TableCell>
+                        <TableCell>
+                          <Typography sx={{ fontWeight: 700 }}>{data.departmentName}</Typography>
+                          {data.admissionType}
+                        </TableCell>
 
-                      <TableCell align="center">{data.recruitmentCount}</TableCell>
-                      <TableCell align="center">{data.applicantsCount}</TableCell>
-                      <TableCell align="center">
-                        <Chip
-                          label={`${data.competitionRatio} : 1`}
-                          color={handleCompetitionColor(data.competitionRatio)}
-                          sx={{
-                            height: 24,
-                            fontSize: "0.75rem",
-                            minWidth: "67px",
-                            textTransform: "capitalize",
-                            "& .MuiChip-label": { fontWeight: 500 },
-                          }}
-                        />
-                      </TableCell>
-                    </TableRow>
-                  ))
-                )}
-              </>
-            )}
-          </TableBody>
-        </Table>
+                        <TableCell align="center">{data.recruitmentCount}</TableCell>
+                        <TableCell align="center">{data.applicantsCount}</TableCell>
+                        <TableCell align="center">
+                          <Chip
+                            label={`${data.competitionRatio} : 1`}
+                            color={handleCompetitionColor(data.competitionRatio)}
+                            sx={{
+                              height: 24,
+                              fontSize: "0.75rem",
+                              minWidth: "67px",
+                              textTransform: "capitalize",
+                              "& .MuiChip-label": { fontWeight: 500 },
+                            }}
+                          />
+                        </TableCell>
+                      </TableRow>
+                    ))
+                  )}
+                </>
+              )}
+            </TableBody>
+          </Table>
+        </BrowserView>
       </TableContainer>
     </Card>
   );
