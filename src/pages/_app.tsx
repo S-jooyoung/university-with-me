@@ -29,7 +29,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 
 import { DefaultSeo } from "next-seo";
-import Script from "next/script";
+import { GoogleAnalytics } from "nextjs-google-analytics";
 
 const DEFAULT_SEO = {
   title: "대학나와 | 실시간 정시 경쟁률 서비스",
@@ -92,21 +92,7 @@ const App = (props: ExtendedAppProps) => {
               <ThemeComponent settings={settings}>
                 {getLayout(
                   <QueryClientProvider client={queryClient}>
-                    <Script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=G-5XXE2NXMCV" />
-                    <Script
-                      id="gtag-init"
-                      strategy="afterInteractive"
-                      dangerouslySetInnerHTML={{
-                        __html: `
-                        window.dataLayer = window.dataLayer || [];
-                        function gtag(){dataLayer.push(arguments);}
-                        gtag('js', new Date());
-                        gtag('config', 'G-5XXE2NXMCV', {
-                          page_path: window.location.pathname,
-                        });
-                      `,
-                      }}
-                    />
+                    <GoogleAnalytics trackPageViews />
                     <DefaultSeo {...DEFAULT_SEO} />
                     <Component {...pageProps} />
                     <ReactQueryDevtools initialIsOpen={false} />
