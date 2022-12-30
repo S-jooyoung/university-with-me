@@ -8,9 +8,6 @@ import type { AppProps } from "next/app";
 import { CacheProvider } from "@emotion/react";
 import type { EmotionCache } from "@emotion/cache";
 
-// ** Config Imports
-import themeConfig from "src/configs/themeConfig";
-
 // ** Component Imports
 import UserLayout from "src/layouts/UserLayout";
 import ThemeComponent from "src/@core/theme/ThemeComponent";
@@ -32,6 +29,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 
 import { DefaultSeo } from "next-seo";
+import Script from "next/script";
 
 const DEFAULT_SEO = {
   title: "대학나와 | 실시간 정시 경쟁률 서비스",
@@ -94,6 +92,21 @@ const App = (props: ExtendedAppProps) => {
               <ThemeComponent settings={settings}>
                 {getLayout(
                   <QueryClientProvider client={queryClient}>
+                    <Script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=G-5XXE2NXMCV" />
+                    <Script
+                      id="gtag-init"
+                      strategy="afterInteractive"
+                      dangerouslySetInnerHTML={{
+                        __html: `
+                        window.dataLayer = window.dataLayer || [];
+                        function gtag(){dataLayer.push(arguments);}
+                        gtag('js', new Date());
+                        gtag('config', 'G-5XXE2NXMCV', {
+                          page_path: window.location.pathname,
+                        });
+                      `,
+                      }}
+                    />
                     <DefaultSeo {...DEFAULT_SEO} />
                     <Component {...pageProps} />
                     <ReactQueryDevtools initialIsOpen={false} />
