@@ -20,6 +20,7 @@ class CustomDocument extends Document {
           <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
           <link rel="apple-touch-icon" sizes="152x152" href="/images/apple-touch-icon.png" />
           <link rel="shortcut icon" href="/images/favicon.png" />
+          <meta name="google-site-verification" content="cUsTLd6hFysJJCGxUTmfGAu4suZ-4tvmWM4u6yWx9ec" />
         </Head>
         <body>
           <Main />
