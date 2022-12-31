@@ -12,6 +12,7 @@ import TableContainer from "@mui/material/TableContainer";
 import Alert from "@mui/material/Alert";
 import LinearProgress from "@mui/material/LinearProgress";
 import { MobileOnlyView, BrowserView } from "react-device-detect";
+import Link from "next/link";
 
 // ** Types Imports
 import { ThemeColor } from "src/@core/layouts/types";
@@ -152,49 +153,51 @@ const DashboardTable = ({ datas, status, error }: any) => {
                 <>
                   {datas?.pages.map((group: any) =>
                     group.result.list.map((data: any, index: any) => (
-                      <TableRow hover key={index} sx={{ "&:last-of-type td, &:last-of-type th": { border: 0 } }}>
-                        <TableCell sx={{ py: (theme) => `${theme.spacing(0.5)} !important` }}>
-                          <Box sx={{ display: "flex", flexDirection: "column" }}>
-                            <Typography sx={{ fontWeight: 700 }}>{data.universityName}</Typography>
-                          </Box>
-                        </TableCell>
-                        <TableCell>
-                          {handledepartmentName(data.departmentName).map((departmentName, index) => {
-                            return (
-                              <div key={index}>
-                                <Typography>{departmentName}</Typography>
-                              </div>
-                            );
-                          })}
-                          {data.admissionType}
-                        </TableCell>
+                      <Link href={data.receptionUrl ? data.receptionUrl : ""}>
+                        <TableRow hover key={index} sx={{ "&:last-of-type td, &:last-of-type th": { border: 0 } }}>
+                          <TableCell sx={{ py: (theme) => `${theme.spacing(0.5)} !important` }}>
+                            <Box sx={{ display: "flex", flexDirection: "column" }}>
+                              <Typography sx={{ fontWeight: 700 }}>{data.universityName}</Typography>
+                            </Box>
+                          </TableCell>
+                          <TableCell>
+                            {handledepartmentName(data.departmentName).map((departmentName, index) => {
+                              return (
+                                <div key={index}>
+                                  <Typography>{departmentName}</Typography>
+                                </div>
+                              );
+                            })}
+                            {data.admissionType}
+                          </TableCell>
 
-                        <TableCell align="center">
-                          <Typography>{data.recruitmentCount}</Typography>
-                        </TableCell>
-                        <TableCell align="center">
-                          {handleApplicantsCount(data.applicantsCount).map((applicantsCount, index) => {
-                            return (
-                              <div key={index}>
-                                <Typography>{applicantsCount}</Typography>
-                              </div>
-                            );
-                          })}
-                        </TableCell>
-                        <TableCell align="center">
-                          <Chip
-                            label={data.competitionRatio === -1 ? `0` : `${data.competitionRatio} : 1`}
-                            color={handleCompetitionColor(data.competitionRatio)}
-                            sx={{
-                              height: 24,
-                              fontSize: "0.75rem",
-                              minWidth: "67px",
-                              textTransform: "capitalize",
-                              "& .MuiChip-label": { fontWeight: 500 },
-                            }}
-                          />
-                        </TableCell>
-                      </TableRow>
+                          <TableCell align="center">
+                            <Typography>{data.recruitmentCount}</Typography>
+                          </TableCell>
+                          <TableCell align="center">
+                            {handleApplicantsCount(data.applicantsCount).map((applicantsCount, index) => {
+                              return (
+                                <div key={index}>
+                                  <Typography>{applicantsCount}</Typography>
+                                </div>
+                              );
+                            })}
+                          </TableCell>
+                          <TableCell align="center">
+                            <Chip
+                              label={data.competitionRatio === -1 ? `0` : `${data.competitionRatio} : 1`}
+                              color={handleCompetitionColor(data.competitionRatio)}
+                              sx={{
+                                height: 24,
+                                fontSize: "0.75rem",
+                                minWidth: "67px",
+                                textTransform: "capitalize",
+                                "& .MuiChip-label": { fontWeight: 500 },
+                              }}
+                            />
+                          </TableCell>
+                        </TableRow>
+                      </Link>
                     ))
                   )}
                 </>
