@@ -2,9 +2,6 @@ import axios, { AxiosResponse } from "axios";
 import { useInfiniteQuery } from "react-query";
 
 const usePost = (queryKey: string, keyword: string, target: string, sort: string, degree: string, area: string) => {
-  if (degree === "전체") degree = "";
-  if (area === "전체") area = "";
-
   const getPosts = async (pageParam: number) => {
     const response: AxiosResponse<any> = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}${target}`, {
       headers: { "Content-Type": "application/json" },

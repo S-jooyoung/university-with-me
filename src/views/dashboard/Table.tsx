@@ -164,7 +164,7 @@ const DashboardTable = ({ datas, status, error }: any) => {
                             {handledepartmentName(data.departmentName).map((departmentName, index) => {
                               return (
                                 <div key={index}>
-                                  <Typography>{departmentName}</Typography>
+                                  <Typography sx={{ fontWeight: 700 }}>{departmentName}</Typography>
                                 </div>
                               );
                             })}

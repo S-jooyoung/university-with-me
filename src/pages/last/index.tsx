@@ -26,8 +26,8 @@ import { useObserver } from "src/hooks/useObserver";
 export default function Last() {
   const [keyword, setKeyword] = useState("");
   const [competition, setCompetition] = useState("competitionRatio,DESC");
-  const [degree, setDegree] = useState("4년제");
-  const [area, setArea] = useState("서울");
+  const [degree, setDegree] = useState("전체");
+  const [area, setArea] = useState("전체");
 
   const bottom: React.MutableRefObject<null> = useRef(null);
 
@@ -80,6 +80,7 @@ export default function Last() {
           <FormControl fullWidth>
             <InputLabel>대학별</InputLabel>
             <Select label="university" value={degree} onChange={handleChangeDegree}>
+              <MenuItem value="전체">전체</MenuItem>
               <MenuItem value="4년제">4년제</MenuItem>
               <MenuItem value="전문대">전문대</MenuItem>
             </Select>
@@ -89,6 +90,7 @@ export default function Last() {
           <FormControl fullWidth>
             <InputLabel>지역</InputLabel>
             <Select label="region" value={area} onChange={handleChangeArea}>
+              <MenuItem value="전체">전체</MenuItem>
               <MenuItem value="서울">서울</MenuItem>
               <MenuItem value="경기">경기</MenuItem>
               <MenuItem value="경남">경남</MenuItem>
