@@ -120,12 +120,12 @@ const DashboardTable = ({ datas, status, error }: any) => {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell sx={{ width: 225 }}>대학</TableCell>
+                <TableCell sx={{ width: 230 }}>대학</TableCell>
                 <TableCell>전형명﹒모집단위</TableCell>
-                <TableCell align="center" sx={{ width: 80 }}>
+                <TableCell align="center" sx={{ width: 90 }}>
                   모집인원
                 </TableCell>
-                <TableCell align="center" sx={{ width: 80 }}>
+                <TableCell align="center" sx={{ width: 90 }}>
                   지원인원
                 </TableCell>
                 <TableCell align="center" sx={{ width: 150 }}>
