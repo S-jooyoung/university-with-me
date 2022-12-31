@@ -23,16 +23,28 @@ const handleCompetitionColor = (competitionRatio: number): ThemeColor => {
   else return "success";
 };
 
+const handledepartmentName = (departmentName: string) => {
+  let departmentNameList = departmentName.split("|");
+
+  return departmentNameList;
+};
+
+const handleApplicantsCount = (applicantsCount: string) => {
+  let applicantsCountList = applicantsCount.split("|");
+
+  return applicantsCountList;
+};
+
 const DashboardTable = ({ datas, status, error }: any) => {
   return (
     <Card>
       <TableContainer>
         <MobileOnlyView>
-          <Table sx={{ minWidth: 350 }} aria-label="table in dashboard">
+          <Table sx={{ minWidth: 350 }}>
             <TableHead>
               <TableRow>
-                <TableCell>대학﹒전형명﹒모집단위</TableCell>
-                <TableCell align="center">
+                <TableCell align="center">대학﹒전형명﹒모집단위</TableCell>
+                <TableCell>
                   <p>모집</p>
                   <p>-</p>
                   <p>지원</p>
@@ -62,15 +74,28 @@ const DashboardTable = ({ datas, status, error }: any) => {
                       <TableRow hover key={index} sx={{ "&:last-of-type td, &:last-of-type th": { border: 0 } }}>
                         <TableCell>
                           <Typography sx={{ fontWeight: 700 }}>{data.universityName}</Typography>
-                          <Typography>{data.departmentName}</Typography>
+                          {handledepartmentName(data.departmentName).map((departmentName, index) => {
+                            return (
+                              <div key={index}>
+                                <Typography>{departmentName}</Typography>
+                              </div>
+                            );
+                          })}
                           {data.admissionType}
                         </TableCell>
                         <TableCell align="center">
-                          <p>{data.recruitmentCount}</p>-<p>{data.applicantsCount}</p>
+                          <Typography>{data.recruitmentCount}</Typography>-
+                          {handleApplicantsCount(data.applicantsCount).map((applicantsCount, index) => {
+                            return (
+                              <div key={index}>
+                                <Typography>{applicantsCount}</Typography>
+                              </div>
+                            );
+                          })}
                         </TableCell>
                         <TableCell align="center">
                           <Chip
-                            label={`${data.competitionRatio} : 1`}
+                            label={data.competitionRatio === -1 ? `0` : `${data.competitionRatio} : 1`}
                             color={handleCompetitionColor(data.competitionRatio)}
                             sx={{
                               height: 24,
@@ -94,7 +119,7 @@ const DashboardTable = ({ datas, status, error }: any) => {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell sx={{ width: 200 }}>대학</TableCell>
+                <TableCell sx={{ width: 225 }}>대학</TableCell>
                 <TableCell>전형명﹒모집단위</TableCell>
                 <TableCell align="center" sx={{ width: 80 }}>
                   모집인원
@@ -134,15 +159,31 @@ const DashboardTable = ({ datas, status, error }: any) => {
                           </Box>
                         </TableCell>
                         <TableCell>
-                          <Typography sx={{ fontWeight: 700 }}>{data.departmentName}</Typography>
+                          {handledepartmentName(data.departmentName).map((departmentName, index) => {
+                            return (
+                              <div key={index}>
+                                <Typography>{departmentName}</Typography>
+                              </div>
+                            );
+                          })}
                           {data.admissionType}
                         </TableCell>
 
-                        <TableCell align="center">{data.recruitmentCount}</TableCell>
-                        <TableCell align="center">{data.applicantsCount}</TableCell>
+                        <TableCell align="center">
+                          <Typography>{data.recruitmentCount}</Typography>
+                        </TableCell>
+                        <TableCell align="center">
+                          {handleApplicantsCount(data.applicantsCount).map((applicantsCount, index) => {
+                            return (
+                              <div key={index}>
+                                <Typography>{applicantsCount}</Typography>
+                              </div>
+                            );
+                          })}
+                        </TableCell>
                         <TableCell align="center">
                           <Chip
-                            label={`${data.competitionRatio} : 1`}
+                            label={data.competitionRatio === -1 ? `0` : `${data.competitionRatio} : 1`}
                             color={handleCompetitionColor(data.competitionRatio)}
                             sx={{
                               height: 24,

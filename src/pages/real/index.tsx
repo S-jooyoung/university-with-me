@@ -135,9 +135,9 @@ export default function Last() {
             }}
           />
         </Grid>
-        <Grid item xs="auto" sm="auto" justifyContent="flex-end" direction="row" rowSpacing={0}>
-          <Alert icon={false} sx={{ backgroundColor: "#a883ed", color: "white", fontWeight: 600 }}>
-            {endTime} 실시간 현황
+        <Grid item xs={12} sm={12} justifyContent="flex-end">
+          <Alert variant="filled" sx={{ backgroundColor: "#a883ed", color: "white", fontWeight: 600 }}>
+            {endTime} 현황
           </Alert>
         </Grid>
         <Grid item xs={12} sx={{ paddingTop: "0" }}>
