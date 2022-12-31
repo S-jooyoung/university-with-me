@@ -15,7 +15,7 @@ export default function LandingPage() {
                 </h1>
                 <p className="mt-3 mb-3 text-base text-gray-400 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">실시간 정시 경쟁률 조회 서비스</p>
 
-                <div className="flex justify-center">
+                <div className="flex justify-center sm:justify-start">
                   <Link href="/real">
                     <button
                       type="submit"
