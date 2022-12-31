@@ -19,6 +19,7 @@ import { useMediaQuery } from "react-responsive";
 // ** Types Imports
 import { ThemeColor } from "src/@core/layouts/types";
 import { useEffect, useState } from "react";
+import { minWidth } from "@mui/system";
 
 const handleCompetitionColor = (competitionRatio: number): ThemeColor => {
   if (competitionRatio >= 0.0 && competitionRatio <= 3.2) return "success";
@@ -57,17 +58,19 @@ const DashboardTable = ({ datas, status, error }: any) => {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell sx={{ width: 170 }}>
-                  <p>대학</p>
-                  <p>전형명</p>
-                  <p>모집단위</p>
+                <TableCell sx={{ minWidth: 160 }}>
+                  <Typography variant="h6" sx={{ fontWeight: 700 }}>
+                    대학
+                  </Typography>
+                  <Typography variant="body1">전형명</Typography>
+                  <Typography variant="caption">모집단위</Typography>
                 </TableCell>
-                <TableCell align="center" sx={{ width: 65 }}>
+                <TableCell align="center" sx={{ width: 65, minWidth: 65 }}>
                   <p>모집</p>
                   <p>﹒</p>
                   <p>지원</p>
                 </TableCell>
-                <TableCell align="center" sx={{ width: 90 }}>
+                <TableCell align="center">
                   <p>경쟁률</p>
                 </TableCell>
               </TableRow>
@@ -92,7 +95,7 @@ const DashboardTable = ({ datas, status, error }: any) => {
                   {datas?.pages.map((group: any) =>
                     group.result.list.map((data: any, index: any) => (
                       <TableRow hover key={index} sx={{ "&:last-of-type td, &:last-of-type th": { border: 0 } }}>
-                        <TableCell sx={{ width: 170 }}>
+                        <TableCell sx={{ minWidth: 160, maxWidth: 160 }}>
                           <Typography variant="h6" sx={{ fontWeight: 700 }}>
                             {data.universityName}
                           </Typography>
@@ -105,8 +108,9 @@ const DashboardTable = ({ datas, status, error }: any) => {
                           })}
                           <Typography variant="caption">{data.admissionType}</Typography>
                         </TableCell>
-                        <TableCell align="center" sx={{ width: 65 }}>
-                          <Typography variant="body2">{data.recruitmentCount}</Typography>-
+                        <TableCell align="center" sx={{ width: 65, minWidth: 65 }}>
+                          <Typography variant="body2">{data.recruitmentCount}</Typography>
+                          <Typography variant="body2">-</Typography>
                           {handleApplicantsCount(data.applicantsCount).map((applicantsCount, index) => {
                             return (
                               <div key={index}>
@@ -115,7 +119,7 @@ const DashboardTable = ({ datas, status, error }: any) => {
                             );
                           })}
                         </TableCell>
-                        <TableCell align="center">
+                        <TableCell align="center" sx={{ width: 67, minWidth: 67 }}>
                           <Chip
                             label={data.competitionRatio === -1 ? `0 : 1` : `${data.competitionRatio} : 1`}
                             color={handleCompetitionColor(data.competitionRatio)}
