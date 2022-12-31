@@ -43,10 +43,10 @@ const DEFAULT_SEO = {
     site_name: "대학나와",
     images: [
       {
-        url: "카카오톡, 페이스북에에 링크 넣으면 올라올 이미지",
+        url: "https://daehagnawa.site/_next/image/?url=%2Fimages%2Fcards%2Flanding.svg&w=640&q=75",
         width: 285,
         height: 167,
-        alt: "대학나와 SNS 이미지",
+        alt: "대학나와 | 실시간 정시 경쟁률 서비스",
       },
     ],
   },
