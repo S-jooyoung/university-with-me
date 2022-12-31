@@ -8,6 +8,7 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
 import Alert from "@mui/material/Alert";
+import Button from "@mui/material/Button";
 
 import moment from "moment";
 import "moment/locale/ko";
@@ -35,7 +36,7 @@ export default function Last() {
 
   const bottom: React.MutableRefObject<null> = useRef(null);
 
-  const { data, fetchNextPage, isFetchingNextPage, status, error, refetch } = usePosts("[real]", keyword, "department", competition, degree, area);
+  const { data, fetchNextPage, isFetchingNextPage, status, error, refetch, hasNextPage } = usePosts("[real]", keyword, "department", competition, degree, area);
 
   const date = new Date(data?.pages[0].result.endTime);
 
@@ -71,6 +72,8 @@ export default function Last() {
     target: bottom,
     onIntersect,
   });
+
+  console.log(hasNextPage);
 
   return (
     <ApexChartWrapper>
@@ -120,11 +123,33 @@ export default function Last() {
             </Select>
           </FormControl>
         </Grid>
+        <Grid item xs={10} sm={10}>
+          <TextField
+            fullWidth
+            size="medium"
+            sx={{ "& .MuiOutlinedInput-root": { borderRadius: 1 } }}
+            onKeyPress={(e) => {
+              if (e.key === "Enter") handleEnter(e);
+            }}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <Magnify fontSize="small" />
+                </InputAdornment>
+              ),
+            }}
+          />
+        </Grid>
+        <Grid container item xs={2} sm={2} justifyContent="flex-start" alignItems="center">
+          <Button variant="contained" size="large">
+            검색
+          </Button>
+        </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
             fullWidth
             size="medium"
-            sx={{ "& .MuiOutlinedInput-root": { borderRadius: 4 } }}
+            sx={{ "& .MuiOutlinedInput-root": { borderRadius: 1 } }}
             onKeyPress={(e) => {
               if (e.key === "Enter") handleEnter(e);
             }}

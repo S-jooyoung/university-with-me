@@ -5,7 +5,7 @@ const usePost = (queryKey: string, keyword: string, target: string, sort: string
   const getPosts = async (pageParam: number) => {
     const response: AxiosResponse<any> = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}${target}`, {
       headers: { "Content-Type": "application/json" },
-      params: { keyword, size: 30, sort, degree, area },
+      params: { keyword, size: 30, sort, degree, area, page: pageParam },
     });
 
     let isLast: boolean;
@@ -19,7 +19,7 @@ const usePost = (queryKey: string, keyword: string, target: string, sort: string
     };
   };
 
-  const { data, fetchNextPage, isFetchingNextPage, status, error, refetch } = useInfiniteQuery(queryKey, ({ pageParam = 0 }) => getPosts(pageParam), {
+  const { data, fetchNextPage, isFetchingNextPage, status, error, refetch, hasNextPage } = useInfiniteQuery(queryKey, ({ pageParam = 0 }) => getPosts(pageParam), {
     getNextPageParam: (lastPage) => {
       if (lastPage && !lastPage.isLast) {
         return Number(lastPage.pageParam);
@@ -28,7 +28,7 @@ const usePost = (queryKey: string, keyword: string, target: string, sort: string
     },
   });
 
-  return { data, fetchNextPage, isFetchingNextPage, status, error, refetch };
+  return { data, fetchNextPage, isFetchingNextPage, status, error, refetch, hasNextPage };
 };
 
 export default usePost;
