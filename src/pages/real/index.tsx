@@ -73,8 +73,6 @@ export default function Last() {
     onIntersect,
   });
 
-  console.log(hasNextPage);
-
   return (
     <ApexChartWrapper>
       <Grid container spacing={6}>

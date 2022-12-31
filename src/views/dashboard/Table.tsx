@@ -11,11 +11,14 @@ import Typography from "@mui/material/Typography";
 import TableContainer from "@mui/material/TableContainer";
 import Alert from "@mui/material/Alert";
 import LinearProgress from "@mui/material/LinearProgress";
-import { MobileOnlyView, BrowserView } from "react-device-detect";
+
 import Link from "next/link";
+
+import { useMediaQuery } from "react-responsive";
 
 // ** Types Imports
 import { ThemeColor } from "src/@core/layouts/types";
+import { useEffect, useState } from "react";
 
 const handleCompetitionColor = (competitionRatio: number): ThemeColor => {
   if (competitionRatio >= 0.0 && competitionRatio <= 3.2) return "success";
@@ -37,20 +40,36 @@ const handleApplicantsCount = (applicantsCount: string) => {
 };
 
 const DashboardTable = ({ datas, status, error }: any) => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  const mobile = useMediaQuery({
+    query: "(max-width:767px)",
+  });
+
+  useEffect(() => {
+    if (mobile) setIsMobile(true);
+  }, [mobile]);
+
   return (
     <Card>
       <TableContainer>
-        <MobileOnlyView>
-          <Table sx={{ minWidth: 350 }}>
+        {isMobile ? (
+          <Table>
             <TableHead>
               <TableRow>
-                <TableCell align="center">대학﹒전형명﹒모집단위</TableCell>
-                <TableCell>
+                <TableCell sx={{ width: 170 }}>
+                  <p>대학</p>
+                  <p>전형명</p>
+                  <p>모집단위</p>
+                </TableCell>
+                <TableCell align="center" sx={{ width: 65 }}>
                   <p>모집</p>
-                  <p>-</p>
+                  <p>﹒</p>
                   <p>지원</p>
                 </TableCell>
-                <TableCell align="center">경쟁률</TableCell>
+                <TableCell align="center" sx={{ width: 90 }}>
+                  <p>경쟁률</p>
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -73,30 +92,32 @@ const DashboardTable = ({ datas, status, error }: any) => {
                   {datas?.pages.map((group: any) =>
                     group.result.list.map((data: any, index: any) => (
                       <TableRow hover key={index} sx={{ "&:last-of-type td, &:last-of-type th": { border: 0 } }}>
-                        <TableCell>
-                          <Typography sx={{ fontWeight: 700 }}>{data.universityName}</Typography>
+                        <TableCell sx={{ width: 170 }}>
+                          <Typography variant="h6" sx={{ fontWeight: 700 }}>
+                            {data.universityName}
+                          </Typography>
                           {handledepartmentName(data.departmentName).map((departmentName, index) => {
                             return (
                               <div key={index}>
-                                <Typography>{departmentName}</Typography>
+                                <Typography variant="body1">{departmentName}</Typography>
                               </div>
                             );
                           })}
-                          {data.admissionType}
+                          <Typography variant="caption">{data.admissionType}</Typography>
                         </TableCell>
-                        <TableCell align="center">
-                          <Typography>{data.recruitmentCount}</Typography>-
+                        <TableCell align="center" sx={{ width: 65 }}>
+                          <Typography variant="body2">{data.recruitmentCount}</Typography>-
                           {handleApplicantsCount(data.applicantsCount).map((applicantsCount, index) => {
                             return (
                               <div key={index}>
-                                <Typography>{applicantsCount}</Typography>
+                                <Typography variant="body2">{applicantsCount}</Typography>
                               </div>
                             );
                           })}
                         </TableCell>
                         <TableCell align="center">
                           <Chip
-                            label={data.competitionRatio === -1 ? `0` : `${data.competitionRatio} : 1`}
+                            label={data.competitionRatio === -1 ? `0 : 1` : `${data.competitionRatio} : 1`}
                             color={handleCompetitionColor(data.competitionRatio)}
                             sx={{
                               height: 24,
@@ -114,9 +135,7 @@ const DashboardTable = ({ datas, status, error }: any) => {
               )}
             </TableBody>
           </Table>
-        </MobileOnlyView>
-
-        <BrowserView>
+        ) : (
           <Table>
             <TableHead>
               <TableRow>
@@ -152,8 +171,8 @@ const DashboardTable = ({ datas, status, error }: any) => {
               {status == "success" && (
                 <>
                   {datas?.pages.map((group: any) =>
-                    group.result.list.map((data: any, index: any) => (
-                      <Link href={data.receptionUrl ? data.receptionUrl : ""}>
+                    group.result.list.map((data: any, index: any, id: number) => (
+                      <Link href={data.receptionUrl ? data.receptionUrl : ""} key={data.id}>
                         <TableRow hover key={index} sx={{ "&:last-of-type td, &:last-of-type th": { border: 0 } }}>
                           <TableCell sx={{ py: (theme) => `${theme.spacing(0.5)} !important` }}>
                             <Box sx={{ display: "flex", flexDirection: "column" }}>
@@ -204,7 +223,7 @@ const DashboardTable = ({ datas, status, error }: any) => {
               )}
             </TableBody>
           </Table>
-        </BrowserView>
+        )}
       </TableContainer>
     </Card>
   );

@@ -94,6 +94,11 @@ const App = (props: ExtendedAppProps) => {
                   <QueryClientProvider client={queryClient}>
                     <GoogleAnalytics trackPageViews />
                     <DefaultSeo {...DEFAULT_SEO} />
+                    <Head>
+                      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"></meta>
+                      <meta name="mobile-web-app-capable" content="yes"></meta>
+                      <meta name="apple-mobile-web-app-capable" content="yes"></meta>
+                    </Head>
                     <Component {...pageProps} />
                     <ReactQueryDevtools initialIsOpen={false} />
                   </QueryClientProvider>
