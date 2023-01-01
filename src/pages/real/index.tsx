@@ -83,18 +83,18 @@ export default function Last() {
     <ApexChartWrapper>
       <Grid container spacing={6}>
         <Grid item xs={4} sm={4}>
-          <FormControl fullWidth sx={{ minWidth: 0 }}>
+          <FormControl fullWidth>
             <InputLabel>경쟁률</InputLabel>
-            <Select label="competition" value={sort} onChange={handleChangeSort}>
+            <Select fullWidth label="competition" value={sort} onChange={handleChangeSort}>
               <MenuItem value="competitionRatio,DESC">높은순</MenuItem>
               <MenuItem value="competitionRatio,ASC">낮은순</MenuItem>
             </Select>
           </FormControl>
         </Grid>
         <Grid item xs={4} sm={4}>
-          <FormControl fullWidth sx={{ minWidth: 0 }}>
+          <FormControl fullWidth>
             <InputLabel>대학별</InputLabel>
-            <Select label="university" value={universityDegree} onChange={handleChangeDegree}>
+            <Select fullWidth label="university" value={universityDegree} onChange={handleChangeDegree}>
               <MenuItem value="전체">전체</MenuItem>
               <MenuItem value="4년제">4년제</MenuItem>
               <MenuItem value="전문대">전문대</MenuItem>
@@ -102,9 +102,9 @@ export default function Last() {
           </FormControl>
         </Grid>
         <Grid item xs={4} sm={4}>
-          <FormControl fullWidth sx={{ minWidth: 0 }}>
+          <FormControl fullWidth>
             <InputLabel>지역</InputLabel>
-            <Select label="region" value={universityArea} onChange={handleChangeArea}>
+            <Select fullWidth label="region" value={universityArea} onChange={handleChangeArea}>
               <MenuItem value="전체">전체</MenuItem>
               <MenuItem value="서울">서울</MenuItem>
               <MenuItem value="경기">경기</MenuItem>
