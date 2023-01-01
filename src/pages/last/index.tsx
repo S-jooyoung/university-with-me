@@ -24,38 +24,44 @@ import React, { useEffect, useRef, useState } from "react";
 import { useObserver } from "src/hooks/useObserver";
 
 export default function Last() {
-  const [keyword, setKeyword] = useState("");
-  const [competition, setCompetition] = useState("competitionRatio,DESC");
-  const [degree, setDegree] = useState("전체");
-  const [area, setArea] = useState("전체");
+  const [universityKeyword, setUniversityKeyword] = useState("");
+  const [departmentKeyword, setDepartmentKeyword] = useState("");
+  const [sort, setSort] = useState("competitionRatio,DESC");
+  const [universityDegree, setUniversityDegree] = useState("전체");
+  const [universityArea, setUniversityArea] = useState("전체");
 
   const bottom: React.MutableRefObject<null> = useRef(null);
 
-  const { data, fetchNextPage, isFetchingNextPage, status, error, refetch } = usePosts("[last]", keyword, "last/department", competition, degree, area);
+  const { data, fetchNextPage, isFetchingNextPage, status, error, refetch, hasNextPage } = usePosts("[real]", universityKeyword, departmentKeyword, universityDegree, universityArea, sort, "department");
 
-  const handleEnter = (e: any) => {
+  const handleEnterUniversity = (e: any) => {
     e.preventDefault();
-    setKeyword(e.target.value);
+    setUniversityKeyword(e.target.value);
   };
 
-  const handleChangeCompetition = (e: SelectChangeEvent) => {
+  const handleEnterDepartment = (e: any) => {
     e.preventDefault();
-    setCompetition(e.target.value as string);
+    setDepartmentKeyword(e.target.value);
+  };
+
+  const handleChangeSort = (e: SelectChangeEvent) => {
+    e.preventDefault();
+    setSort(e.target.value as string);
   };
 
   const handleChangeDegree = (e: SelectChangeEvent) => {
     e.preventDefault();
-    setDegree(e.target.value as string);
+    setUniversityDegree(e.target.value as string);
   };
 
   const handleChangeArea = (e: SelectChangeEvent) => {
     e.preventDefault();
-    setArea(e.target.value as string);
+    setUniversityArea(e.target.value as string);
   };
 
   useEffect(() => {
     refetch();
-  }, [keyword, competition, degree, area]);
+  }, [universityKeyword, departmentKeyword, sort, universityDegree, universityArea]);
 
   const onIntersect = ([entry]: any) => entry.isIntersecting && fetchNextPage();
 
@@ -70,7 +76,7 @@ export default function Last() {
         <Grid item xs={4} sm={4}>
           <FormControl fullWidth>
             <InputLabel>경쟁률</InputLabel>
-            <Select label="competition" value={competition} onChange={handleChangeCompetition}>
+            <Select label="competition" value={sort} onChange={handleChangeSort}>
               <MenuItem value="competitionRatio,DESC">높은순</MenuItem>
               <MenuItem value="competitionRatio,ASC">낮은순</MenuItem>
             </Select>
@@ -79,7 +85,7 @@ export default function Last() {
         <Grid item xs={4} sm={4}>
           <FormControl fullWidth>
             <InputLabel>대학별</InputLabel>
-            <Select label="university" value={degree} onChange={handleChangeDegree}>
+            <Select label="university" value={universityDegree} onChange={handleChangeDegree}>
               <MenuItem value="전체">전체</MenuItem>
               <MenuItem value="4년제">4년제</MenuItem>
               <MenuItem value="전문대">전문대</MenuItem>
@@ -89,7 +95,7 @@ export default function Last() {
         <Grid item xs={4} sm={4}>
           <FormControl fullWidth>
             <InputLabel>지역</InputLabel>
-            <Select label="region" value={area} onChange={handleChangeArea}>
+            <Select label="region" value={universityArea} onChange={handleChangeArea}>
               <MenuItem value="전체">전체</MenuItem>
               <MenuItem value="서울">서울</MenuItem>
               <MenuItem value="경기">경기</MenuItem>
@@ -115,10 +121,29 @@ export default function Last() {
         <Grid item xs={12} sm={12}>
           <TextField
             fullWidth
+            placeholder="대학교 이름을 검색해보세요!"
             size="medium"
-            sx={{ "& .MuiOutlinedInput-root": { borderRadius: 4 } }}
+            sx={{ "& .MuiOutlinedInput-root": { borderRadius: 1 } }}
             onKeyPress={(e) => {
-              if (e.key === "Enter") handleEnter(e);
+              if (e.key === "Enter") handleEnterUniversity(e);
+            }}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <Magnify fontSize="small" />
+                </InputAdornment>
+              ),
+            }}
+          />
+        </Grid>
+        <Grid item xs={12} sm={12}>
+          <TextField
+            fullWidth
+            placeholder="학과 이름을 검색해보세요!"
+            size="medium"
+            sx={{ "& .MuiOutlinedInput-root": { borderRadius: 1 } }}
+            onKeyPress={(e) => {
+              if (e.key === "Enter") handleEnterDepartment(e);
             }}
             InputProps={{
               startAdornment: (

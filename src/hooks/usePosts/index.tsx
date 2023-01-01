@@ -1,11 +1,12 @@
 import axios, { AxiosResponse } from "axios";
 import { useInfiniteQuery } from "react-query";
 
-const usePost = (queryKey: string, keyword: string, target: string, sort: string, degree: string, area: string) => {
+const usePost = (queryKey: string, universityKeyword: string, departmentKeyword: string, universityDegree: string, universityArea: string, sort: string, target: string) => {
   const getPosts = async (pageParam: number) => {
+    console.log(universityKeyword, departmentKeyword, universityDegree, universityArea, sort);
     const response: AxiosResponse<any> = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}${target}`, {
       headers: { "Content-Type": "application/json" },
-      params: { keyword, size: 30, sort, degree, area, page: pageParam },
+      params: { universityKeyword, departmentKeyword, size: 30, sort, universityDegree, universityArea, page: pageParam },
     });
 
     let isLast: boolean;
