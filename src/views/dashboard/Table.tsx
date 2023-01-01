@@ -18,14 +18,14 @@ import { useMediaQuery } from "react-responsive";
 
 // ** Types Imports
 import { ThemeColor } from "src/@core/layouts/types";
+import { UseAdsense } from "src/hooks/useAdsense";
 import { useEffect, useState } from "react";
-import { minWidth } from "@mui/system";
 
 const handleCompetitionColor = (competitionRatio: number): ThemeColor => {
   if (competitionRatio >= 0.0 && competitionRatio <= 3.2) return "success";
   else if (competitionRatio >= 3.3 && competitionRatio <= 6.2) return "warning";
   else if (competitionRatio >= 6.3) return "error";
-  else return "success";
+  else return "default";
 };
 
 const handledepartmentName = (departmentName: string) => {
@@ -121,7 +121,7 @@ const DashboardTable = ({ datas, status, error }: any) => {
                         </TableCell>
                         <TableCell align="center" sx={{ width: 67, minWidth: 67 }}>
                           <Chip
-                            label={data.competitionRatio === -1 ? `0 : 1` : `${data.competitionRatio} : 1`}
+                            label={data.competitionRatio === -1 ? `제공안함` : `${data.competitionRatio} : 1`}
                             color={handleCompetitionColor(data.competitionRatio)}
                             sx={{
                               height: 24,
@@ -208,7 +208,7 @@ const DashboardTable = ({ datas, status, error }: any) => {
                           </TableCell>
                           <TableCell align="center">
                             <Chip
-                              label={data.competitionRatio === -1 ? `0` : `${data.competitionRatio} : 1`}
+                              label={data.competitionRatio === -1 ? `제공안함` : `${data.competitionRatio} : 1`}
                               color={handleCompetitionColor(data.competitionRatio)}
                               sx={{
                                 height: 24,
