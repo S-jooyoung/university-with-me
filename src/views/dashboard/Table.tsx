@@ -21,7 +21,9 @@ import { ThemeColor } from "src/@core/layouts/types";
 import { UseAdsense } from "src/hooks/useAdsense";
 import { useEffect, useState } from "react";
 
-const handleCompetitionColor = (competitionRatio: number): ThemeColor => {
+type Color = {};
+
+const handleCompetitionColor = (competitionRatio: number) => {
   if (competitionRatio >= 0.0 && competitionRatio <= 3.2) return "success";
   else if (competitionRatio >= 3.3 && competitionRatio <= 6.2) return "warning";
   else if (competitionRatio >= 6.3) return "error";

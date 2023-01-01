@@ -3,7 +3,7 @@ import { Settings } from "src/@core/context/settingsContext";
 
 export type ContentWidth = "full" | "boxed";
 
-export type ThemeColor = "primary" | "secondary" | "error" | "warning" | "info" | "success" | "default";
+export type ThemeColor = "primary" | "secondary" | "error" | "warning" | "info" | "success";
 
 export type NavLink = {
   path?: string;
