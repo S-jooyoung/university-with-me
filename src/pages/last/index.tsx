@@ -74,7 +74,7 @@ export default function Last() {
     <ApexChartWrapper>
       <Grid container spacing={6}>
         <Grid item xs={4} sm={4}>
-          <FormControl fullWidth>
+          <FormControl fullWidth sx={{ minWidth: 0 }}>
             <InputLabel>경쟁률</InputLabel>
             <Select label="competition" value={sort} onChange={handleChangeSort}>
               <MenuItem value="competitionRatio,DESC">높은순</MenuItem>
@@ -83,7 +83,7 @@ export default function Last() {
           </FormControl>
         </Grid>
         <Grid item xs={4} sm={4}>
-          <FormControl fullWidth>
+          <FormControl fullWidth sx={{ minWidth: 0 }}>
             <InputLabel>대학별</InputLabel>
             <Select label="university" value={universityDegree} onChange={handleChangeDegree}>
               <MenuItem value="전체">전체</MenuItem>
@@ -93,7 +93,7 @@ export default function Last() {
           </FormControl>
         </Grid>
         <Grid item xs={4} sm={4}>
-          <FormControl fullWidth>
+          <FormControl fullWidth sx={{ minWidth: 0 }}>
             <InputLabel>지역</InputLabel>
             <Select label="region" value={universityArea} onChange={handleChangeArea}>
               <MenuItem value="전체">전체</MenuItem>
@@ -121,6 +121,7 @@ export default function Last() {
         <Grid item xs={12} sm={12}>
           <TextField
             fullWidth
+            type="search"
             placeholder="대학교 이름을 검색해보세요!"
             size="medium"
             sx={{ "& .MuiOutlinedInput-root": { borderRadius: 1 } }}
@@ -139,6 +140,7 @@ export default function Last() {
         <Grid item xs={12} sm={12}>
           <TextField
             fullWidth
+            type="search"
             placeholder="학과 이름을 검색해보세요!"
             size="medium"
             sx={{ "& .MuiOutlinedInput-root": { borderRadius: 1 } }}

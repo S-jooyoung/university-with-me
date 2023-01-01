@@ -21,8 +21,6 @@ class CustomDocument extends Document {
           <link rel="apple-touch-icon" sizes="152x152" href="/images/apple-touch-icon.png" />
           <link rel="shortcut icon" href="/images/favicon.png" />
           <meta name="google-site-verification" content="cUsTLd6hFysJJCGxUTmfGAu4suZ-4tvmWM4u6yWx9ec" />
-          <meta charSet="UTF-8" />
-          <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
           <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4083591465738564" crossOrigin="anonymous"></script>
         </Head>
         <body>
