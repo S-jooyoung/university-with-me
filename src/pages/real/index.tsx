@@ -168,7 +168,9 @@ export default function Last() {
 
         <Grid item xs={12} sm={12} justifyContent="flex-end">
           <Alert variant="filled" sx={{ backgroundColor: "#a883ed", color: "white", fontWeight: 600 }}>
-            {endTime} 현황
+            <p className="text-white">{endTime} 현황</p>
+            <p className="text-slate-600"> ※ 4년제 대학교 업데이트 종료되었습니다.</p>
+            <p className="text-slate-600"> ※ 전문 대학교 업데이트 진행 중입니다.</p>
           </Alert>
         </Grid>
         <Grid item xs={12} sx={{ paddingTop: "0" }}>
