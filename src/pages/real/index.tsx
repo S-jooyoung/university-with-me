@@ -37,11 +37,7 @@ export default function Last() {
 
   const bottom: React.MutableRefObject<null> = useRef(null);
 
-  const { data, fetchNextPage, isFetchingNextPage, status, error, refetch, hasNextPage } = usePosts("[real]", universityKeyword, departmentKeyword, universityDegree, universityArea, sort, "department");
-
-  const date = new Date(data?.pages[0].result.endTime);
-
-  const endTime = moment(date).calendar();
+  const { data, fetchNextPage, isFetchingNextPage, status, error, refetch } = usePosts("[real]", universityKeyword, departmentKeyword, universityDegree, universityArea, sort, "department");
 
   const handleEnterUniversity = (e: any) => {
     e.preventDefault();
@@ -164,14 +160,6 @@ export default function Last() {
               ),
             }}
           />
-        </Grid>
-
-        <Grid item xs={12} sm={12} justifyContent="flex-end">
-          <Alert variant="filled" sx={{ backgroundColor: "#a883ed", color: "white", fontWeight: 600 }}>
-            <p className="text-white">{endTime} 현황</p>
-            <p className="text-slate-600"> ※ 4년제 대학교 업데이트 종료되었습니다.</p>
-            <p className="text-slate-600"> ※ 전문 대학교 업데이트 진행 중입니다.</p>
-          </Alert>
         </Grid>
         <Grid item xs={12} sx={{ paddingTop: "0" }}>
           <Table datas={data} status={status} error={error} />
